@@ -1,0 +1,14 @@
+.APP
+{
+    position: relative;
+    display: flex;
+    height: 100%;
+}
+.header_view
+{
+    flex:1
+}
+.pages_view
+{
+    flex:5;
+}

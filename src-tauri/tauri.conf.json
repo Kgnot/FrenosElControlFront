@@ -1,0 +1,37 @@
+{
+  "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
+  "productName": "FrenosControl",
+  "version": "0.1.0",
+  "identifier": "com.FrenosElControl.frenos",
+  "build": {
+    "frontendDist": "../dist",
+    "devUrl": "http://localhost:5173",
+    "beforeDevCommand": "yarn cross-env BROWSER=none yarn start",
+    "beforeBuildCommand": "yarn build"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "Frenos",
+        "width": 1120,
+        "height": 630,
+        "resizable": true,
+        "fullscreen": false
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ]
+  }
+}

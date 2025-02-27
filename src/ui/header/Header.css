@@ -1,0 +1,13 @@
+.header{
+    position: relative;
+    display:flex;
+    flex-direction: column;
+    background-color: #ffffff;
+}
+
+.slogan_header{
+    flex:1;
+}
+.nav_header{
+    flex:8;
+}

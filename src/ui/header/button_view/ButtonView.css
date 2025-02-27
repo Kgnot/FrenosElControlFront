@@ -1,0 +1,14 @@
+.button_view
+{
+    background-color: inherit;
+    padding: 0.2rem 1rem;
+    transition: background-color 0.2s ease;
+    text-align: start;
+    width: 100%;
+    height: 2em;
+}
+.button_view:hover
+{
+    background-color: rgb(222, 222, 222);
+
+}
