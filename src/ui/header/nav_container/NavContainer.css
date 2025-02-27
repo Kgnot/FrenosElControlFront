@@ -6,6 +6,7 @@
     border-radius: 0 75px 0 0;
     flex-direction: column;
     justify-content: space-between;
+    text-align: start;
 }
 
 .buttons_nav

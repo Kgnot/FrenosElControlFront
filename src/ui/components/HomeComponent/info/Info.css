@@ -1,0 +1,30 @@
+.info-card {
+    border-radius: 12px;
+    height: 100%;
+    padding: 12px 16px;
+    font-size: 14px;
+    color: #444;
+    line-height: 2.6;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.info-line {
+    margin: 4px 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.info-email {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.info-email:hover {
+    text-decoration: underline;
+}

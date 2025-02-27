@@ -1,0 +1,26 @@
+.upPerfil
+{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    gap: 2em;
+}
+
+.upPerfil img
+{
+    width: 40%;
+    object-fit: cover;
+    border-radius: 50%;
+
+}
+.upPerfil-info
+{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

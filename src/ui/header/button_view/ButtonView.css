@@ -5,6 +5,7 @@
     transition: background-color 0.2s ease;
     text-align: start;
     width: 100%;
+    min-width: 12em;
     height: 2em;
 }
 .button_view:hover

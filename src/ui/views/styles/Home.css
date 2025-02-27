@@ -1,0 +1,47 @@
+.HOME_PAGE
+{
+    position: relative;
+    display: flex;
+}
+
+/*Izquierda*/
+.HOME_PAGE_izq
+{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex:2;
+}
+/*Izquierda - superior*/
+.HOME_PAGE_izq_sup
+{
+    position: relative;
+    flex:1;
+}
+/*Izquierda - inferior*/
+.HOME_PAGE_izq_inf
+{
+    position: relative;
+    flex:1;
+}
+/*Derecha*/
+.HOME_PAGE_der
+{
+    position: relative;
+    flex:1;
+    display: flex;
+    flex-direction: column;
+}
+/*Derecha - superior*/
+.HOME_PAGE_der_sup
+{
+    position: relative;
+    flex:1;
+}
+/*Derecha - inferior*/
+.HOME_PAGE_der_inf
+{
+    position: relative;
+    flex:1;
+}
+

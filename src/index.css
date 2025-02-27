@@ -32,6 +32,18 @@
     min-height: 100vh;
 }
 
+.PAGE
+{
+    height: 100%;
+}
+
+.hijo
+{
+    border-radius: 15px;
+    margin: 0.8em;
+    border: 1px solid var(--gray_app);
+}
+
 button {
     font-family: inherit;
     font-size: inherit;
