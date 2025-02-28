@@ -2,12 +2,19 @@
 {
     background-color: white;
     color: var(--color-primary);
-    padding: 1em;
+    padding: 0 1em;
     font-weight: bold;
     border: #e8e8ef 1px solid;
+    height: 3em;
+    width: 8em;
 
 }
 
 .filterInvoice:hover{
+    background-color: #e8e8ef;
+}
+
+.filterInvoice.push
+{
     background-color: #e8e8ef;
 }

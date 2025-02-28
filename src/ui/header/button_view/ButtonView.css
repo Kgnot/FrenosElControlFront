@@ -7,6 +7,9 @@
     width: 100%;
     min-width: 12em;
     height: 2em;
+    color:white;
+    font-family: "Raleway", serif;
+
 }
 .button_view:hover
 {

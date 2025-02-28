@@ -1,4 +1,18 @@
-.transactionTable h2
+.transactionTable
 {
+    position: relative;
+}
+
+.transactionTable h4
+{
+    position: relative;
     padding-left: 15px;
+}
+.transactionTable
+{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    padding-top: 1em;
 }

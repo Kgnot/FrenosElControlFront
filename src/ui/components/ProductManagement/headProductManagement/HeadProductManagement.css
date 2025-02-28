@@ -1,0 +1,9 @@
+.headProductManagement
+{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 85%;
+    gap: 1em;
+    padding: 1em;
+}

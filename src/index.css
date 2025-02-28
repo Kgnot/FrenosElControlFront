@@ -47,7 +47,7 @@
 /* Atributos propios de html*/
 /* Estilo general para todos los select */
 select {
-    appearance: none; /* Quita el estilo por defecto del navegador */
+    appearance: none;
     width: 100%;
     max-width: 240px;
     padding: 10px 14px;

@@ -1,0 +1,31 @@
+
+.productItem {
+    position: relative;
+    display: flex;
+    background: #fff;
+    border: 1px solid #e7e7e7;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 2px 4px rgba(234, 234, 234, 0.86);
+    width:calc(33.333% - 1em);
+    min-width: 150px;
+    box-sizing: border-box;
+    flex-direction: column;
+    gap: 8px;
+    cursor: pointer;
+    transition: scale 0.2s ease-out;
+}
+.productItem:hover{
+    scale: 1.03;
+}
+.productItem div:first-child {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.productItem div:last-child {
+    font-size: 14px;
+    color: #555;
+    margin-top: 4px;
+    flex-grow: 1;
+}

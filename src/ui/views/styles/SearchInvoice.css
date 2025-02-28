@@ -3,6 +3,10 @@
     position: relative;
     display: flex;
     flex-direction: column;
+    font-family: "Raleway", serif;
+    justify-content: center;
+    height: 80%;
+    /*background-color: #007bff;*/
 }
 
 /*Parte de Arriba*/

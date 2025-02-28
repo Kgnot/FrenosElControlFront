@@ -9,10 +9,10 @@ export const FilterMonth = ({className}:{className:string}) => {
 
     return (
         <div className={className}>
+            <span> Mes: </span>
             <select>
                 {months.map((item, index) => <option value={index + 1}>{item}</option>)}
             </select>
-            <button> X </button>
         </div>
 
     )

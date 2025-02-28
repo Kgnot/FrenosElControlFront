@@ -5,7 +5,7 @@
     flex-direction: column;
     gap: 1em;
 }
-.customerForm h2
+.customerForm h4
 {
     padding-left: 10px;
 }

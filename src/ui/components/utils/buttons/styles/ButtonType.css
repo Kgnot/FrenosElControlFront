@@ -1,0 +1,36 @@
+.buttonType1
+{
+    background-color: var(--color-primary);
+    color: var(--white);
+    padding:0.3em 1em;
+    &:hover{
+        background-color: rgba(15, 33, 47, 0.7);
+    }
+
+}
+.buttonType2
+{
+    background-color: var(--white);
+    color: var(--color-primary);
+    &:hover{
+        background-color: #e8e8ef;
+    }
+
+}
+.buttonType3
+{
+    background-color: var(--red_app);
+    color: var(--white);
+    &:hover{
+        background-color: rgba(207, 53, 59, 0.66);
+    }
+
+}
+
+.buttonType1,.buttonType2,.buttonType3
+{
+    padding:0.3em 1em;
+    border: #e8e8ef 1px solid;
+    border-radius: 5px;
+
+}

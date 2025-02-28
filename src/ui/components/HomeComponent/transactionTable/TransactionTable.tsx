@@ -40,7 +40,7 @@ export const TransactionTable = ({className}: { className: string }) => {
 
     return (
         <section className={`transactionTable ${className}`}>
-            <h2> Transaction Table </h2>
+            <h4> Tabla de últimas transacciones </h4>
             <TableComponent columns={columns} data={mockData}/>
         </section>
     )

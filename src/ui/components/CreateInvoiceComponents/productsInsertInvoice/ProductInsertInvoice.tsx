@@ -1,5 +1,8 @@
 import './ProductInsertInvoice.css'
 import {TableComponent} from "../../utils/table/TableComponent.tsx";
+import {ButtonType1} from "../../utils/buttons/ButtonType1.tsx";
+import {ButtonType2} from "../../utils/buttons/ButtonType2.tsx";
+import {ButtonType3} from "../../utils/buttons/ButtonType3.tsx";
 
 interface ProductInsert {
     id: number;
@@ -39,35 +42,25 @@ const mockData: ProductInsert[] = [
 
 export const ProductInsertInvoice = ({className}: { className: string }) => {
     const columns = [
-        {
-            name: 'Id',
-            selector: (row: ProductInsert) => row.id
-        },
-        {
-            name: 'Código del producto',
-            selector: (row: ProductInsert) => row.productCode
-        },
-        {
-            name: 'Descripción',
-            selector: (row: ProductInsert) => row.productDescription
-        },
-        {
-            name: 'Cantidad',
-            selector: (row: ProductInsert) => row.quantity
-        },
-        {
-            name: 'Valor unitario',
-            selector: (row: ProductInsert) => row.unitValue
-        },
-        {
-            name: 'Total',
-            selector: (row: ProductInsert) => row.total
-        }
+        {name: 'Id', selector: (row: ProductInsert) => row.id},
+        {name: 'Código del producto', selector: (row: ProductInsert) => row.productCode},
+        {name: 'Descripción', selector: (row: ProductInsert) => row.productDescription},
+        {name: 'Cantidad', selector: (row: ProductInsert) => row.quantity},
+        {name: 'Valor unitario', selector: (row: ProductInsert) => row.unitValue},
+        {name: 'Total', selector: (row: ProductInsert) => row.total}
     ];
 
 
     return (
-        <section className={` ${className}`}>
+        <section className={`productInsertInvoice ${className}`}>
+            <div className={"titleProductInsertInvoice"}>
+                <h4>Items de la factura</h4>
+                <div>
+                    <ButtonType1>Añadir item</ButtonType1>
+                    <ButtonType2>Modificar item</ButtonType2>
+                    <ButtonType3>Eliminar Item</ButtonType3>
+                </div>
+            </div>
             <TableComponent columns={columns} data={mockData}/>
         </section>
     )

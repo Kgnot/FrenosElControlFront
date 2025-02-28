@@ -1,0 +1,21 @@
+.PRODUCT_PAGE
+{
+    position:relative;
+    display:flex;
+    justify-content: center;
+    padding: 0 1.5em;
+    align-items: center;
+    height: 80%;
+    /*background-color: #007bff;*/
+    font-family: "Raleway", serif;
+
+}
+
+.PRODUCT_PAGE_izq
+{
+    flex:1;
+}
+.PRODUCT_PAGE_der
+{
+    flex:3
+}

@@ -1,0 +1,9 @@
+.customerTable
+{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    max-height: 40em;
+    height: 40em;
+}

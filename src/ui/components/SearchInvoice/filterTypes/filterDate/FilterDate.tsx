@@ -1,16 +1,29 @@
+import { useState } from "react";
+import { DatePicker } from 'rsuite';
+import "rsuite/dist/rsuite.min.css";
 
-export const FilterDate = ({ className }: { className: string }) => {
-    // const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+interface FilterDateProps {
+    className: string;
+}
+
+export const FilterDate = ({ className }:FilterDateProps) => {
+    const [startDate, setStartDate] = useState<Date|null>(null);
+
+    const handleDateChange =(date: Date | null) => {
+        setStartDate(date);
+    };
 
     return (
         <div className={className}>
-            {/*<DatePicker*/}
-            {/*    selected={selectedDate}*/}
-            {/*    onChange={(date) => setSelectedDate(date)}*/}
-            {/*    placeholderText="Selecciona un día"*/}
-            {/*    dateFormat="dd/MM/yyyy"*/}
-            {/*    isClearable*/}
-            {/*/>*/}
+            <span> Fecha: </span>
+            <DatePicker
+                value={startDate}
+                onChange={handleDateChange}
+                format="dd/MM/yyyy" // Formato de fecha
+                placeholder="Selecciona una fecha"
+                cleanable // Permite borrar la fecha
+                style={{width: 200}} // Estilos inline
+            />
         </div>
     );
 };

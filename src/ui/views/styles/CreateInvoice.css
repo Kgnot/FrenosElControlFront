@@ -3,6 +3,9 @@
     position: relative;
     display: flex;
     flex-direction: column;
+    font-family: "Raleway", serif;
+    width: 100%;
+    height: 98%;
 }
 
 /*Superior*/
@@ -16,8 +19,6 @@
 .CREATEINVOICE_PAGE_sup_der
 {
     flex:1;
-
-
 }
 /*Sup-Izquierda*/
 .CREATEINVOICE_PAGE_sup_izq

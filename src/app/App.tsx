@@ -6,8 +6,23 @@ import CreateInvoice from "../ui/views/CreateInvoice.tsx";
 import SearchInvoice from "../ui/views/SearchInvoice.tsx";
 import CustomerManagement from "../ui/views/CustomerManagement.tsx";
 import ProductManagement from "../ui/views/ProductManagement.tsx";
+import {useEffect} from "react";
+import { invoke } from '@tauri-apps/api/tauri';
 
 function App() {
+
+    useEffect(() => {
+        const ejecutarJar = async () => {
+            try {
+                const result = await invoke<string>("ejecutar_jar");
+                console.log("Jar ejecutado:", result);
+            } catch (error) {
+                console.error("Error al ejecutar el jar:", error);
+            }
+        };
+
+        ejecutarJar();
+    }, []);
 
     return (
         <section className="APP">

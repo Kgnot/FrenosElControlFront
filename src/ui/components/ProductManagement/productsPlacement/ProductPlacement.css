@@ -1,0 +1,14 @@
+.productsPlacement
+{
+    position: relative;
+    background-color: var(--gray_app2);
+    height: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+    align-items: flex-start; /* Evita que las cajas se estiren */
+    gap: 1em;
+    max-height: 50em;
+    overflow-y: scroll;
+
+}

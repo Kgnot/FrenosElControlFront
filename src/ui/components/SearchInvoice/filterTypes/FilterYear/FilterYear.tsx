@@ -5,10 +5,10 @@ export const FilterYear = ({ className }: { className: string }) => {
 
     return (
         <div className={className}>
+            <span> Año: </span>
             <select>
                 {year.map((item, index) => <option value={index + 1}>{item}</option>)}
             </select>
-            <button> X </button>
         </div>
     )
 }

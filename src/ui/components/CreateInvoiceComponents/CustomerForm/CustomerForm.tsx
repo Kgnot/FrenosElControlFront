@@ -9,7 +9,7 @@ export const CustomerForm = ({className}: { className: string }) => {
 
     return (
         <section className={`customerForm ${className}`}>
-            <h2> Información del cliente </h2>
+            <h4> Información del cliente </h4>
             <form className={"form_customerForm"}>
                 <div className={"form_div"}>
                     <InputCustomerForm

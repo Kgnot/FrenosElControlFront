@@ -1,4 +1,5 @@
 import './FilterInvoice.css'
+import {useState} from "react";
 
 
 interface FilterInvoiceProps {
@@ -7,13 +8,21 @@ interface FilterInvoiceProps {
     parentMethod: (name: string) => void
 }
 
-export const FilterInvoice = ({className, name, parentMethod}: FilterInvoiceProps) => {
+export const FilterInvoice = ({ className, name, parentMethod }: FilterInvoiceProps) => {
+    const [isPushed, setIsPushed] = useState(false);
+
+    const handleClick = () => {
+        parentMethod(name);
+        setIsPushed(!isPushed);
+    };
+
     return (
-        <button className={`${className} filterInvoice`}
-                onClick={() => parentMethod(name)}
+        <button
+            className={`${className} filterInvoice ${isPushed ? "push" : ""}`}
+            onClick={handleClick}
         >
             {name}
         </button>
-    )
-}
+    );
+};
 

@@ -28,15 +28,20 @@ export const InvoiceSearch = ({ className }: { className: string }) => {
             {/* Botones de filtros */}
             <div className={"filter_buttons_button"}>
                 <FilterList parentMethod={handleFilterToggle}/>
-                <button>Buscar</button>
+                <button className="searchInvoiceButton" >Buscar</button>
             </div>
             {/* Render dinámico de los filtros seleccionados */}
             <div className="active-filters">
-                {selectedFilters.includes("Fecha") && <FilterDate className=""/>}
-                {selectedFilters.includes("Mes") && <FilterMonth className=""/>}
-                {selectedFilters.includes("Año") && <FilterYear className=""/>}
-                {selectedFilters.includes("Cliente") && <FilterCustom className=""/>}
-                {selectedFilters.includes("ID Factura") && <FilterID className=""/>}
+                {selectedFilters.includes("Fecha") && <FilterDate className="active-filters-type"/>}
+                {selectedFilters.includes("Mes") && <FilterMonth className="active-filters-type"/>}
+                {selectedFilters.includes("Año") && <FilterYear className="active-filters-type"/>}
+                {selectedFilters.includes("Cliente") && <FilterCustom className="active-filters-type"/>}
+                {selectedFilters.includes("ID Factura") && <FilterID className="active-filters-type"/>}
+                {selectedFilters.length===0 &&
+                    <div className="waitingFilters">
+                        <img src="/images/logo.png" alt=""/>
+                    </div>
+                }
             </div>
         </section>
     );

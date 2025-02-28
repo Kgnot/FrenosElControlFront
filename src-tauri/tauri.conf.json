@@ -13,8 +13,8 @@
     "windows": [
       {
         "title": "Frenos",
-        "width": 1120,
-        "height": 630,
+        "width": 1280,
+        "height": 720,
         "resizable": true,
         "fullscreen": false
       }
@@ -32,6 +32,10 @@
       "icons/128x128@2x.png",
       "icons/icon.icns",
       "icons/icon.ico"
+    ],
+    "resources": [
+      "resources/backend/App.jar",
+      "resources/backend/FrenosElControl.db"
     ]
   }
 }
