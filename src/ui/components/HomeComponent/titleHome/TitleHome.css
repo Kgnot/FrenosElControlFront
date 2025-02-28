@@ -13,15 +13,13 @@
 }
 .titleHome div
 {
-    flex:5;
+    flex:4;
     display: flex;
     justify-content: center;
     align-items: center;
-    object-fit: fill;
 }
 .titleHome img
 {
-    width: 100%;
-    height: 100%;
-    object-fit: fill;
+    width:85%;
+    object-fit: contain;
 }

@@ -4,7 +4,7 @@ import {FilterInvoice} from "../filter/FilterInvoice.tsx";
 
 interface FilterListProps {
     className?: string;
-    parentMethod: () => void
+    parentMethod: (name:string) => void
 }
 
 export const FilterList = ({className, parentMethod}: FilterListProps) => {

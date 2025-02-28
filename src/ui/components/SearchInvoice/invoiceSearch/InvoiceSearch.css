@@ -2,3 +2,18 @@
 {
     padding: 0 2.5em;
 }
+
+.active-filters
+{
+    margin-top: 1em;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+.filter_buttons_button
+{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
