@@ -1,0 +1,31 @@
+.CREATEINVOICE_PAGE
+{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+/*Superior*/
+.CREATEINVOICE_PAGE_sup
+{
+    position: relative;
+    display: flex;
+    flex:4
+}
+/*Sup-Derecha*/
+.CREATEINVOICE_PAGE_sup_der
+{
+    flex:1;
+
+
+}
+/*Sup-Izquierda*/
+.CREATEINVOICE_PAGE_sup_izq
+{
+    flex:1;
+}
+/*Inferior*/
+.CREATEINVOICE_PAGE_inf
+{
+    flex:3
+}

@@ -1,0 +1,66 @@
+.invoiceDetails {
+    padding: 1.5rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+.invoiceDetails h2 {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin: 0;
+    color: #1a1a1a;
+}
+
+.detailsInvoice {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.invoiceDetails .button-group {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.invoiceDetails button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.invoiceDetails button:first-child {
+    background-color: black;
+    color: white;
+    border: none;
+}
+
+.invoiceDetails button:first-child:hover {
+    background-color: #333;
+}
+
+.invoiceDetails button:last-child {
+    background-color: white;
+    color: #1a1a1a;
+    border: 1px solid #ddd;
+}
+
+.invoiceDetails button:last-child:hover {
+    background-color: #f5f5f5;
+}
+.invoiceButtons
+{
+    position: relative;
+    display: flex;
+    gap: 1em;
+}

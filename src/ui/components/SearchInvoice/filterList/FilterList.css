@@ -1,0 +1,6 @@
+.filterList
+{
+    position: relative;
+    display: flex;
+    gap: 1em;
+}

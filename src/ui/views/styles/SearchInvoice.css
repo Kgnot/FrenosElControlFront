@@ -1,0 +1,17 @@
+.SEARCHINVOICE_PAGE
+{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+/*Parte de Arriba*/
+.search_and_filters
+{
+    flex:1;
+}
+/*Parte de abajo*/
+.table_invoice_searched
+{
+    flex:1;
+}

@@ -1,0 +1,13 @@
+.filterInvoice
+{
+    background-color: white;
+    color: var(--color-primary);
+    padding: 1em;
+    font-weight: bold;
+    border: #e8e8ef 1px solid;
+
+}
+
+.filterInvoice:hover{
+    background-color: #e8e8ef;
+}
