@@ -14,9 +14,10 @@
       {
         "title": "Frenos",
         "width": 1280,
-        "height": 720,
+        "height": 730,
         "resizable": true,
-        "fullscreen": false
+        "fullscreen": false,
+        "devtools": true
       }
     ],
     "security": {
@@ -35,7 +36,7 @@
     ],
     "resources": [
       "resources/backend/App.jar",
-      "resources/backend/FrenosElControl.db"
+      "resources/db/FrenosElControl.db"
     ]
   }
 }

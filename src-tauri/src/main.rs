@@ -1,18 +1,26 @@
-// Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 use std::process::Command;
 use std::env;
-use std::path::PathBuf;
 
 #[tauri::command]
 fn ejecutar_jar() -> Result<String, String> {
+    ejecutar_jar_interno()
+}
+
+fn ejecutar_jar_automatic() {
+    let _ = ejecutar_jar_interno();
+}
+
+fn ejecutar_jar_interno() -> Result<String, String> {
     let mut jar_path = env::current_exe().unwrap();
-    jar_path.pop();  // deja la carpeta de instalación
-    jar_path.push("tu_programa.jar");
+    jar_path.pop();
+    jar_path.push("resources");
+    jar_path.push("backend");
+    jar_path.push("App.jar");
 
     if !jar_path.exists() {
-        return Err("No se encontró tu_programa.jar en la carpeta de instalación".to_string());
+        return Err(format!("No se encontró el archivo: {:?}", jar_path));
     }
 
     let output = Command::new("java")
@@ -32,12 +40,11 @@ fn ejecutar_jar() -> Result<String, String> {
     }
 }
 
-
 fn main() {
-  app_lib::run();
-  tauri::Builder::default()
-          .invoke_handler(tauri::generate_handler![ejecutar_jar])
-          .run(tauri::generate_context!())
-          .expect("error while running tauri application");
+    ejecutar_jar_automatic();
 
+    tauri::Builder::default()
+        .invoke_handler(tauri::generate_handler![ejecutar_jar])
+        .run(tauri::generate_context!())
+        .expect("error al correr la aplicación Tauri");
 }

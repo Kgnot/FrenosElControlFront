@@ -7,7 +7,7 @@ import SearchInvoice from "../ui/views/SearchInvoice.tsx";
 import CustomerManagement from "../ui/views/CustomerManagement.tsx";
 import ProductManagement from "../ui/views/ProductManagement.tsx";
 import {useEffect} from "react";
-import { invoke } from '@tauri-apps/api/tauri';
+import {invoke} from "@tauri-apps/api/core";
 
 function App() {
 
