@@ -1,6 +1,6 @@
 import {ProductItem} from "../productItem/ProductItem.tsx";
 import {useFetch} from "../../../../hooks/useFetch.ts";
-import {Product} from "../../../../entity/Product.ts";
+import {Product} from "../../../../entity";
 import './ProductPlacement.css'
 
 export const ProductsPlacement = ({className}: { className: string }) => {

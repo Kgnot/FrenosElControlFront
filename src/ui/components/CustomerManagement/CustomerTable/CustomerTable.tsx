@@ -1,7 +1,10 @@
 import './CustomerTable.css'
 import {TableComponent} from "../../utils/table/TableComponent.tsx";
-import {useFetch} from "../../../../hooks/useFetch.ts";
-import {Customer} from "../../../../entity/Customer.ts";
+import {useCustomer} from "../../../../hooks/customers/useCustomer.ts";
+import {useCustomersByName} from "../../../../hooks/customers/useCustomerByName.ts";
+import {useState} from "react";
+import {CustomerModal} from "../../modal/customer/CustomerModal.tsx";
+import {BlackScreenModal} from "../../modal/BlackScreenModal.tsx";
 
 interface CustomerTableInsert {
     name: string
@@ -9,8 +12,18 @@ interface CustomerTableInsert {
     address: string
     phone: string
 }
+
 export const CustomerTable = ({className}: { className: string }) => {
-    const {data:muckData,error,loading} = useFetch<Customer[]>("http://localhost:8080/customer/")
+    const {clientes: data, loading, error} = useCustomer();
+    const [name, setName] = useState<string | null>(null);
+    const {cliente, loading: loadingCliente, error: errorCliente} = useCustomersByName(name);
+
+    const handleRowClick = (row: CustomerTableInsert) => {
+        setName(row.name);  // Dispara el fetch
+    };
+    const quitModal = () => {
+        setName(null)
+    }
 
     const columns = [
         {name: 'Nombre', selector: (row: CustomerTableInsert) => row.name},
@@ -19,25 +32,32 @@ export const CustomerTable = ({className}: { className: string }) => {
         {name: 'Teléfono', selector: (row: CustomerTableInsert) => row.phone},
     ];
 
-
-    if(error)
-        return(
-            <>
-                Error {error}
-            </>
-        )
-
-    if(loading)
-        return(
-            <>
-                Loading ...
-            </>
-        )
+    if (loading) return <p>Cargando...</p>;
+    if (error) return <p>{error}</p>;
 
     return (
-        <section className={`${className} customerTable`}>
-            <TableComponent columns={columns} data={muckData?? []}/>
-        </section>
-    )
-}
+        <>
+            {cliente && (
+                <BlackScreenModal>
+                    <CustomerModal
+                        className=""
+                        customer={cliente}
+                        parentMethod={quitModal}
+                    >
+                        {loadingCliente && <p>Buscando cliente...</p>}
+                        {errorCliente && <p>{errorCliente}</p>}
+                    </CustomerModal>
+                </BlackScreenModal>
+
+            )}
+            <section className={`${className} customerTable`}>
+                <TableComponent
+                    columns={columns}
+                    data={data ?? []}
+                    onRowClick={handleRowClick}
+                />
+            </section>
+        </>
+    );
+};
 
