@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import {Customer} from "../../entity";
-import {fetchClientesByNameAPI} from "../../function";
+import {fetchCustomerByNameAPI} from "../../function";
 
 
 
@@ -18,7 +18,7 @@ export const useCustomersByName = (name: string|null) => {
 
             setLoading(true);
             try {
-                const response = await fetchClientesByNameAPI(name);
+                const response = await fetchCustomerByNameAPI(name);
                 setCliente(response);
             } catch (err) {
                 setError(`Error al obtener clientes: ${err}`);

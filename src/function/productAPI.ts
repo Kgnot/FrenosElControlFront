@@ -1,10 +1,10 @@
-import {Customer} from "../entity";
+import {Product} from "../entity";
 import {invoke} from "@tauri-apps/api/core";
 
-export async function fetchClientesAPI(): Promise<Customer[]> {
+export async function productAPI(): Promise<Product[]> {
     if (import.meta.env.MODE === "development") {
         // Dev: llama a tu backend normal
-        const response = await fetch("http://localhost:8080/customer/");
+        const response = await fetch("http://localhost:8080/product/");
         if (!response.ok) {
             throw new Error("Error al obtener clientes desde el backend");
         }
@@ -16,16 +16,16 @@ export async function fetchClientesAPI(): Promise<Customer[]> {
     }
 }
 
-export async function fetchClientesByNameAPI(name: string): Promise<Customer> {
+export async function fetchProductByNameAPI(description: string): Promise<Product> {
     if (import.meta.env.MODE === "development") {
         // Modo desarrollo: Llama al backend directamente
-        const response = await fetch(`http://localhost:8080/customer/${name}`);
+        const response = await fetch(`http://localhost:8080/product/description/${description}`);
         if (!response.ok) {
-            throw new Error(`Error al obtener clientes por nombre: ${name}`);
+            throw new Error(`Error al obtener clientes por nombre: ${description}`);
         }
         return await response.json();
     } else {
-        const response = await invoke<string>("obtener_clientes_por_nombre", { name });
+        const response = await invoke<string>("obtener_productos_por_descripcion", { description });
         return JSON.parse(response);
     }
 }

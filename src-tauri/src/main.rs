@@ -45,15 +45,6 @@ async fn obtener_clientes() -> Result<String, String> {
     Ok(body)
 }
 // Haremos cada uno de los endpoints:
-#[tauri::command]
-async fn obtener_productos() -> Result<String,String> {
-    let response = reqwest::get("http://localhost:8080/product/")
-        .await
-        .map_err(|e| e.to_string())?;
-
-    let body =  response.text().await.map_err(|e| e.to_string())?;
-    Ok(body)
-}
 
 #[tauri::command]
 async fn obtener_clientes_por_nombre(nombre: String) -> Result<String, String> {
@@ -65,13 +56,33 @@ async fn obtener_clientes_por_nombre(nombre: String) -> Result<String, String> {
     let body = response.text().await.map_err(|e| e.to_string())?;
     Ok(body)
 }
+#[tauri::command]
+async fn obtener_productos() -> Result<String,String> {
+    let response = reqwest::get("http://localhost:8080/product/")
+        .await
+        .map_err(|e| e.to_string())?;
+
+    let body =  response.text().await.map_err(|e| e.to_string())?;
+    Ok(body)
+}
+
+#[tauri::command]
+async fn obtener_productos_por_descripcion(description: String) -> Result<String,String> {
+    let url = format!("http://localhost:8080/product/description/{}", description);
+        let response = reqwest::get(&url)
+            .await
+            .map_err(|e| e.to_string())?;
+
+        let body = response.text().await.map_err(|e| e.to_string())?;
+        Ok(body)
+}
 
 //  Main:
 fn main() {
     ejecutar_jar_automatic();
 
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![ejecutar_jar, obtener_clientes,obtener_productos])
+        .invoke_handler(tauri::generate_handler![ejecutar_jar, obtener_clientes,obtener_productos,obtener_productos_por_descripcion,obtener_clientes_por_nombre])
         .run(tauri::generate_context!())
         .expect("error al correr la aplicación Tauri");
 }

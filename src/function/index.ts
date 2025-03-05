@@ -1,1 +1,2 @@
-export * from './fetchClientesAPI.ts'
+export * from './customerAPI.ts'
+export * from './productAPI.ts'

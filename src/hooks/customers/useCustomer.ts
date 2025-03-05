@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import {Customer} from "../../entity";
-import {fetchClientesAPI} from "../../function";
+import {customerAPI} from "../../function";
 
 
 export const useCustomer = () => {
@@ -12,7 +12,7 @@ export const useCustomer = () => {
         const fetchClientes = async () => {
             setLoading(true);
             try {
-                const response = await fetchClientesAPI();
+                const response = await customerAPI();
                 setClientes(response);
             } catch (err) {
                 setError(`Error al obtener clientes: ${err}`);

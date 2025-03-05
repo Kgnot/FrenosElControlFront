@@ -1,10 +1,25 @@
 import {ProductItem} from "../productItem/ProductItem.tsx";
-import {useFetch} from "../../../../hooks/useFetch.ts";
-import {Product} from "../../../../entity";
 import './ProductPlacement.css'
+import {useProduct} from "../../../../hooks/useProduct/useProduct.ts";
+import {useState} from "react";
+import {useProductByDescription} from "../../../../hooks/useProduct/useProductByDescription.ts";
+import {Product} from "../../../../entity";
+import {BlackScreenModal} from "../../modal/BlackScreenModal.tsx";
+import {ProductModal} from "../../modal/product/ProductModal.tsx";
 
 export const ProductsPlacement = ({className}: { className: string }) => {
-    const {data, loading, error} = useFetch<Product[]>("http://localhost:8080/product/");
+
+    const {products, loading, error} = useProduct();
+    const [description, setDescription] = useState<string | null>(null);
+    const {product, loading: productLoading, error: productError} = useProductByDescription(description);
+
+    const handleModalView = (p: Product) => {
+        setDescription(p.description);  // Dispara el fetch
+        console.log("producto: ",p)
+    };
+    const quitModal = () => {
+        setDescription(null)
+    }
 
     if (error) {
         return (
@@ -22,11 +37,25 @@ export const ProductsPlacement = ({className}: { className: string }) => {
         )
     }
     return (
-        <section className={`${className} productsPlacement`}>
+        <>
+            {product &&
+            <BlackScreenModal>
+                <ProductModal
+                    product={product}
+                    quitModal={quitModal}
+                >
+                    {productError && <div> Error {productError}</div>}
+                    {productLoading && <div> Cargando . . . </div>}
+                </ProductModal>
+            </BlackScreenModal>
+            }
+            <section className={`${className} productsPlacement`}>
 
-            {data?.map(item => <ProductItem description={item.description} code={item.code}/>)}
+                {products?.map(item => <ProductItem product={item} handleModal={handleModalView}/>)}
 
 
-        </section>
+            </section>
+        </>
+
     )
 }
