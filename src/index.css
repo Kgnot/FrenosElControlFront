@@ -123,3 +123,12 @@ body {
     min-height: 100vh;
     background-color: white;
 }
+
+/* Celdas de react-data-table*/
+.rdt_TableCell {
+    transition: background-color 0.3s ease;
+}
+
+.rdt_TableCell:hover {
+    background-color: #f0f0f0;
+}

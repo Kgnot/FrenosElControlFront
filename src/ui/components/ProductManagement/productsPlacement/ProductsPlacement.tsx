@@ -1,15 +1,19 @@
 import {ProductItem} from "../productItem/ProductItem.tsx";
 import './ProductPlacement.css'
-import {useProduct} from "../../../../hooks/useProduct/useProduct.ts";
 import {useState} from "react";
 import {useProductByDescription} from "../../../../hooks/useProduct/useProductByDescription.ts";
 import {Product} from "../../../../entity";
 import {BlackScreenModal} from "../../modal/BlackScreenModal.tsx";
 import {ProductModal} from "../../modal/product/ProductModal.tsx";
 
-export const ProductsPlacement = ({className}: { className: string }) => {
+interface ProductsPlacementProps
+{
+    className:string;
+    products:Product[]
+}
 
-    const {products, loading, error} = useProduct();
+
+export const ProductsPlacement = ({className,products}:ProductsPlacementProps) => {
     const [description, setDescription] = useState<string | null>(null);
     const {product, loading: productLoading, error: productError} = useProductByDescription(description);
 
@@ -19,22 +23,6 @@ export const ProductsPlacement = ({className}: { className: string }) => {
     };
     const quitModal = () => {
         setDescription(null)
-    }
-
-    if (error) {
-        return (
-            <>
-                error xd
-            </>
-        )
-    }
-
-    if (loading) {
-        return (
-            <>
-                cargando ...
-            </>
-        )
     }
     return (
         <>

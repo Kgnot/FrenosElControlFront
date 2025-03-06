@@ -29,3 +29,17 @@ export async function fetchProductByNameAPI(description: string): Promise<Produc
         return JSON.parse(response);
     }
 }
+
+export async function  fetchProductsByDescLetterAPI(letter:string): Promise<Product[]>{
+    if (import.meta.env.MODE === "development") {
+        // Modo desarrollo: Llama al backend directamente
+        const response = await fetch(`http://localhost:8080/product/description/letter/${letter}`);
+        if (!response.ok) {
+            throw new Error(`Error al obtener clientes por nombre: ${letter}`);
+        }
+        return await response.json();
+    } else {
+        const response = await invoke<string>("obtener_productos_por_letra_desc", { letter });
+        return JSON.parse(response);
+    }
+}

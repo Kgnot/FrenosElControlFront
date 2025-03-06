@@ -19,16 +19,16 @@ export const CustomerModal = ({ className, customer, parentMethod, children,onMo
             <div className="customerModal__header">Detalle del Cliente</div>
             <div className="customerModal__form">
                 <label className="customerModal__label">Nombre:</label>
-                <input value={customer.name} placeholder="Nombre"/>
+                <input defaultValue={customer.name} placeholder="Nombre"/>
 
                 <label className="customerModal__label">Cédula:</label>
-                <input value={customer.identify} placeholder="Cédula"/>
+                <input defaultValue={customer.identify} placeholder="Cédula"/>
 
                 <label className="customerModal__label">Dirección:</label>
-                <input value={customer.address} placeholder="Dirección"/>
+                <input defaultValue={customer.address} placeholder="Dirección"/>
 
                 <label className="customerModal__label">Teléfono:</label>
-                <input value={customer.phone} placeholder="Teléfono"/>
+                <input defaultValue={customer.phone} placeholder="Teléfono"/>
             </div>
 
             <div className="customerModal__footer">

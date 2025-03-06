@@ -5,6 +5,7 @@ interface ButtonType
 {
     className?:string;
     parentMethod?:()=>void
+    parentMethodVar?:()=>void
     children:ReactNode
 }
 

@@ -7,3 +7,12 @@
     gap: 1em;
     padding: 1em;
 }
+
+.headProductManagementButtonContainer
+{
+    margin-top: 5em;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap:1em;
+}
