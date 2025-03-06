@@ -11,7 +11,7 @@ export async function productAPI(): Promise<Product[]> {
         return await response.json();
     } else {
         // Prod: llama a Rust vía Tauri
-        const response = await invoke<string>("obtener_clientes");
+        const response = await invoke<string>("obtener_productos");
         return JSON.parse(response);
     }
 }
