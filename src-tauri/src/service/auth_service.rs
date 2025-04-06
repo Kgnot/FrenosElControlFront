@@ -13,7 +13,7 @@ impl<'a> AuthService<'a> {
 
     pub async fn login(&self, username: &str, password: &str) -> Result<LoginResponse, ApiError> {
         let req = LoginRequest {
-            username: username.to_string(),
+            name: username.to_string(),
             password: password.to_string(),
         };
         self.repository.login(&req).await

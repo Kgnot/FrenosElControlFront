@@ -47,7 +47,7 @@ impl ApiClient{
         T: for<'de> Deserialize<'de>,
         B: Serialize,
     {
-        let url = format!("{}/{}", self.base_url, endpoint);
+        let url = format!("{}{}", self.base_url, endpoint);
         let res = self.client
             .post(&url)
             .json(body) // manda el body como JSON

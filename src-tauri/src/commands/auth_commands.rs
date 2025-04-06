@@ -7,7 +7,7 @@ pub async fn login(username: String, password: String) -> Result<LoginResponse, 
     let client = ApiClient::new("http://localhost:8080");
     let repo = AuthRepository::new(&client);
 
-    let req = LoginRequest { username, password };
+    let req = LoginRequest { name: username, password };
 
     repo.login(&req)
         .await
@@ -15,7 +15,7 @@ pub async fn login(username: String, password: String) -> Result<LoginResponse, 
 }
 
 #[tauri::command]
-pub async fn refresh(token: String) -> Result<LoginResponse, String> {
+pub async fn refresh(token: &str) -> Result<LoginResponse, String> {
     let client = ApiClient::with_token("http://localhost:8080", &token);
     let repo = AuthRepository::new(&client);
 

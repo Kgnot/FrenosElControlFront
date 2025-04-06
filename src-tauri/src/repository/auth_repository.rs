@@ -1,5 +1,6 @@
 use crate::err::http_error::ApiError;
 use crate::api::api_client::ApiClient;
+use crate::api::api_response::ApiResponse;
 use crate::model::auth::{LoginRequest, LoginResponse};
 
 
@@ -15,7 +16,8 @@ impl<'a> AuthRepository<'a>{
     }
 
     pub async fn login(&self, req: &LoginRequest) -> Result<LoginResponse, ApiError> {
-        self.client.post("/auth/login", req).await
+        let wrapped : ApiResponse<LoginResponse> = self.client.post("/auth/login", req).await?;
+        Ok(wrapped.content)
     }
 
     pub async fn refresh(&self, token: &str) -> Result<LoginResponse, ApiError> {
