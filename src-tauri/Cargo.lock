@@ -94,6 +94,7 @@ checksum = "6b964d184e89d9b6b67dd2715bc8e74cf3107fb2b529990c90cf517326150bf4"
 name = "app"
 version = "0.1.0"
 dependencies = [
+ "bytes",
  "log",
  "reqwest 0.11.27",
  "serde",
@@ -102,6 +103,7 @@ dependencies = [
  "tauri-build",
  "tauri-plugin-http",
  "tauri-plugin-log",
+ "thiserror 2.0.11",
  "tokio",
 ]
 

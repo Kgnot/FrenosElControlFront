@@ -6,8 +6,8 @@
   "build": {
     "frontendDist": "../dist",
     "devUrl": "http://localhost:5173",
-    "beforeDevCommand": "yarn cross-env BROWSER=none yarn start",
-    "beforeBuildCommand": "yarn build"
+    "beforeDevCommand": "npx cross-env BROWSER=none npm start",
+    "beforeBuildCommand": "npm build"
   },
   "app": {
     "windows": [
