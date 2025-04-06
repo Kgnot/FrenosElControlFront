@@ -4,7 +4,7 @@ mod brandCar;
 mod carType;
 mod inventory;
 mod invoice;
-mod item;
+pub(crate) mod item;
 mod itemType;
 mod payment;
 mod pdf;

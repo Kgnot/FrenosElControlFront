@@ -3,7 +3,7 @@ import {ButtonType1} from "../../utils/buttons/ButtonType1.tsx";
 import {ButtonType2} from "../../utils/buttons/ButtonType2.tsx";
 import {useRef} from "react";
 import {SearchInput} from "../../utils/searchInput/SearchInput.tsx";
-import {fetchProductsByDescLetterAPI} from "../../../../function";
+import {fetchItemsByLetterAPI} from "../../../../function";
 import {Product} from "../../../../entity";
 
 
@@ -27,7 +27,7 @@ export const HeadProductManagement = ({className, searchProduct}: HeadProductMan
             <span>Buscar Producto</span>
 
             <SearchInput<Product>
-                searchFunction={fetchProductsByDescLetterAPI}
+                searchFunction={fetchItemsByLetterAPI}
                 renderItem={(product) => (
                     <div>
                         {product.description}

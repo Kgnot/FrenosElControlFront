@@ -1,2 +1,2 @@
 export * from './customerAPI.ts'
-export * from './productAPI.ts'
+export * from './itemAPI.ts'

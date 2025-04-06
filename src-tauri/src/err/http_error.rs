@@ -10,4 +10,6 @@ pub enum ApiError {
 
     #[error("Other: {0}")]
     Other(String),
+    #[error("Not Found")]
+    Status(u16)
 }

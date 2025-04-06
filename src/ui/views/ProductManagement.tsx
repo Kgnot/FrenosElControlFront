@@ -3,12 +3,12 @@ import {ProductsPlacement} from "../components/ProductManagement/productsPlaceme
 import './styles/ProductManagement.css'
 import {useProduct} from "../../hooks/useProduct/useProduct.ts";
 import {useState} from "react";
-import {useProductByDescriptionLetter} from "../../hooks/useProduct/useProductByDescriptionLetter.ts";
+import {useItemByDescriptionLetter} from "../../hooks/useProduct/useItemByDescriptionLetter.ts";
 
 export default function ProductManagement() {
     const {products} = useProduct();
     const [letter,setLetter] = useState<string|null>(null);
-    const {products:productsSearched} = useProductByDescriptionLetter(letter);
+    const {products:productsSearched} = useItemByDescriptionLetter(letter);
 
     const handleSearchProduct = (descLet:string) =>
     {

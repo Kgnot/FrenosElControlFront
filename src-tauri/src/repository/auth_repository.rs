@@ -5,20 +5,20 @@ use crate::model::auth::{LoginRequest, LoginResponse};
 
 
 pub struct AuthRepository<'a> {
-    client: &'a ApiClient,
-}
-
-
-impl<'a> AuthRepository<'a>{
-
-    pub fn new(client: &'a ApiClient) -> Self {
-        AuthRepository { client }
+        client: &'a ApiClient,
     }
 
-    pub async fn login(&self, req: &LoginRequest) -> Result<LoginResponse, ApiError> {
-        let wrapped : ApiResponse<LoginResponse> = self.client.post("/auth/login", req).await?;
-        Ok(wrapped.content)
-    }
+
+    impl<'a> AuthRepository<'a>{
+
+        pub fn new(client: &'a ApiClient) -> Self {
+            AuthRepository { client }
+        }
+
+        pub async fn login(&self, req: &LoginRequest) -> Result<LoginResponse, ApiError> {
+            let wrapped : ApiResponse<LoginResponse> = self.client.post("auth/login", req).await?;
+            Ok(wrapped.content)
+        }
 
     pub async fn refresh(&self, token: &str) -> Result<LoginResponse, ApiError> {
         #[derive(serde::Serialize)]

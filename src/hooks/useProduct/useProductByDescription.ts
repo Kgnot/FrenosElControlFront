@@ -1,6 +1,6 @@
 import {Product} from "../../entity";
 import {useEffect, useState} from "react";
-import {fetchProductByNameAPI} from "../../function";
+import {fetchItemByDescriptionAPI} from "../../function";
 
 
 export const useProductByDescription = (description:string|null)=>
@@ -19,7 +19,7 @@ export const useProductByDescription = (description:string|null)=>
 
             setLoading(true);
             try {
-                const response = await fetchProductByNameAPI(description);
+                const response = await fetchItemByDescriptionAPI(description);
                 setProduct(response);
             } catch (err) {
                 setError(`Error al obtener clientes: ${err}`);

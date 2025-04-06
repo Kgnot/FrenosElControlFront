@@ -38,12 +38,8 @@ export const ProductsPlacement = ({className,products}:ProductsPlacementProps) =
             </BlackScreenModal>
             }
             <section className={`${className} productsPlacement`}>
-
                 {products?.map(item => <ProductItem product={item} handleModal={handleModalView}/>)}
-
-
             </section>
         </>
-
     )
 }
