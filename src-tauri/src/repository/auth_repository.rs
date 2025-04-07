@@ -20,13 +20,13 @@ pub struct AuthRepository<'a> {
             Ok(wrapped.content)
         }
 
-    pub async fn refresh(&self, token: &str) -> Result<LoginResponse, ApiError> {
+    pub async fn refresh(&self, refresh_token: &str) -> Result<LoginResponse, ApiError> {
         #[derive(serde::Serialize)]
         struct RefreshRequest<'a> {
-            token: &'a str,
+            ref_token: &'a str,
         }
 
-        let req = RefreshRequest { token };
+        let req = RefreshRequest { ref_token: refresh_token };
         self.client.post("/auth/refresh", &req).await
     }
 }

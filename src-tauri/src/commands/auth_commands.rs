@@ -16,11 +16,11 @@ pub async fn login(username: String, password: String) -> Result<LoginResponse, 
 }
 
 #[tauri::command]
-pub async fn refresh(token: &str) -> Result<LoginResponse, String> {
-    let client = ApiClient::with_token(BASE_URL, &token);
+pub async fn refresh(refresh_token: &str) -> Result<LoginResponse, String> {
+    let client = ApiClient::new(BASE_URL);
     let repo = AuthRepository::new(&client);
 
-    repo.refresh(&token)
+    repo.refresh(&refresh_token)
         .await
         .map_err(|e| format!("Refresh failed: {:?}", e))
 }

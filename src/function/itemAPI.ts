@@ -1,21 +1,14 @@
 import {Product} from "../entity";
-import {invoke} from "@tauri-apps/api/core";
 import {ApiPageableResponse, ApiResponse} from "../entity/wrapper/wrappers.ts";
-
-function getToken(): string {
-    const jwt = localStorage.getItem("jwt");
-    if (!jwt) {
-        throw new Error("No se encontró el token JWT");
-    }
-    return jwt;
-}
+import {getToken} from "./getToken.ts";
+import {safeInvoke} from "./safeInvoke.ts";
 
 export async function itemAPI(): Promise<Product[]> {
     const token = getToken();
     const page = 0;
     const size = 100;
     console.log("ItemAPi")
-    const response = await invoke<ApiPageableResponse<Product[]>>("get_all_items", {
+    const response = await safeInvoke<ApiPageableResponse<Product[]>>("get_all_items", {
         token,
         page,
         size,
@@ -28,26 +21,23 @@ export async function itemAPI(): Promise<Product[]> {
 export async function fetchItemsByTypeAPI(type: string): Promise<Product[]> {
     console.log("fetchItemsByTypeAPI")
     const token = getToken();
-    const response = await invoke<string>("get_items_by_type", { type, token });
-    const data = await JSON.parse(response);
-    return data;
+    const response = await safeInvoke<ApiResponse<Product[]>>("get_items_by_type", { type, token });
+    return response.content;
 }
 
 // GET /item/description/{description}
 export async function fetchItemByDescriptionAPI(description: string): Promise<Product> {
     console.log("fetchItemByDescriptionAPI")
     const token = getToken();
-    const response = await invoke<string>("get_items_by_description", { description, token });
-    const data = await JSON.parse(response);
-    return data;
+    const response = await safeInvoke<ApiResponse<Product>>("get_items_by_description", { description, token });
+    return response.content;
 }
 
 // GET /item/description/letter/{letter}
 export async function fetchItemsByLetterAPI(letter: string): Promise<Product[]> {
     console.log("fetchItemsByLetterAPI")
     const token = getToken();
-    const response = await invoke<ApiResponse<Product[]>>("get_items_by_letter", { letter, token });
-    console.log(response);
+    const response = await safeInvoke<ApiResponse<Product[]>>("get_items_by_letter", { letter, token });
     return response.content;
 }
 
@@ -55,24 +45,20 @@ export async function fetchItemsByLetterAPI(letter: string): Promise<Product[]> 
 export async function fetchItemsByWordAPI(word: string): Promise<Product[]> {
     console.log("fetchItemsByWordAPI")
     const token = getToken();
-    const response = await invoke<string>("get_items_by_word", { word, token });
-    console.log(response);
-    const data = await JSON.parse(response);
-    return data;
+    const response = await safeInvoke<ApiResponse<Product[]>>("get_items_by_word", { word, token });
+    return response.content;
 }
 
 // POST /item
 export async function createItemAPI(item: Product): Promise<Product> {
     const token = getToken();
-    const response = await invoke<string>("create_item", { item, token });
-    const data = await JSON.parse(response);
-    return data;
+    const response = await safeInvoke<ApiResponse<Product>>("create_item", { item, token });
+    return response.content;
 }
 
 // PUT /item
 export async function updateItemAPI(item: Product): Promise<Product> {
     const token = getToken();
-    const response = await invoke<string>("update_item", { item, token });
-    const data = await JSON.parse(response);
-    return data;
+    const response = await safeInvoke<ApiResponse<Product>>("update_item", { item, token });
+    return response.content;
 }

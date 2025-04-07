@@ -33,7 +33,7 @@ export const CustomerTable = ({className}: { className: string }) => {
     ];
 
     if (loading) return <p>Cargando...</p>;
-    if (error) return <p>{error}</p>;
+    if (error) return <p>error : {error}</p>;
 
     return (
         <>

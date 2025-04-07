@@ -1,31 +1,59 @@
 import {Customer} from "../entity";
-import {invoke} from "@tauri-apps/api/core";
+import {ApiPageableResponse, ApiResponse} from "../entity/wrapper/wrappers.ts";
+import {getToken} from "./getToken.ts";
+import {safeInvoke} from "./safeInvoke.ts";
 
+
+
+// GET /customer (paginado)
+//TODO: implement pagination
 export async function customerAPI(): Promise<Customer[]> {
-    if (import.meta.env.MODE === "development") {
-        // Dev: llama a tu backend normal
-        const response = await fetch("http://localhost:8080/customer/");
-        if (!response.ok) {
-            throw new Error("Error al obtener clientes desde el backend");
-        }
-        return await response.json();
-    } else {
-        // Prod: llama a Rust vía Tauri
-        const response = await invoke<string>("obtener_clientes");
-        return JSON.parse(response);
-    }
+    const token = getToken();
+    const page = 0;
+    const size = 100;
+    console.log("customerAPI");
+    const response = await safeInvoke<ApiPageableResponse<Customer[]>>("get_all_customer", {
+        token,
+        page,
+        size,
+    });
+    return response.content;
 }
 
+// GET /customer/{name}
 export async function fetchCustomerByNameAPI(name: string): Promise<Customer> {
-    if (import.meta.env.MODE === "development") {
-        // Modo desarrollo: Llama al backend directamente
-        const response = await fetch(`http://localhost:8080/customer/${name}`);
-        if (!response.ok) {
-            throw new Error(`Error al obtener clientes por nombre: ${name}`);
-        }
-        return await response.json();
-    } else {
-        const response = await invoke<string>("obtener_clientes_por_nombre", { name });
-        return JSON.parse(response);
-    }
+    console.log("fetchCustomerByNameAPI");
+    const token = getToken();
+    const response = await safeInvoke<ApiResponse<Customer>>("get_customer_by_name", { name, token });
+    return response.content;
+}
+
+// GET /customer/letter/{letter}
+export async function fetchCustomerByLetterNameAPI(letter: string): Promise<Customer[]> {
+    console.log("fetchCustomerByLetterNameAPI");
+    const token = getToken();
+    const response = await safeInvoke<ApiResponse<Customer[]>>("get_customer_by_letter_name", { letter, token });
+    return response.content;
+}
+
+// GET /customer/contain/{name}
+export async function fetchCustomerByContainingNameAPI(name: string): Promise<Customer[]> {
+    console.log("fetchCustomerByContainingNameAPI");
+    const token = getToken();
+    const response = await safeInvoke<ApiResponse<Customer[]>>("get_customer_by_containing_name", { name, token });
+    return response.content;
+}
+
+// POST /customer
+export async function createCustomerAPI(customer: Customer): Promise<Customer> {
+    const token = getToken();
+    const response = await safeInvoke<ApiResponse<Customer>>("create_customer", { customer, token });
+    return response.content;
+}
+
+// PUT /customer
+export async function updateCustomerAPI(customer: Customer): Promise<Customer> {
+    const token = getToken();
+    const response = await safeInvoke<ApiResponse<Customer>>("update_customer", { customer, token });
+    return response.content;
 }

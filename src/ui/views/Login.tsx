@@ -2,6 +2,7 @@ import './styles/Login.css'
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import {invoke} from "@tauri-apps/api/core";
+import {LoginResponse} from "../../entity";
 
 
 export const Login = ({ onLogin }: { onLogin: () => void }) => {
@@ -12,8 +13,9 @@ export const Login = ({ onLogin }: { onLogin: () => void }) => {
 
     const handleLogin = async () =>{
         try{
-            const result : {token:string} = await invoke('login',{username,password})
-            localStorage.setItem('jwt',result.token)
+            const result : LoginResponse = await invoke<LoginResponse>('login',{username,password})
+            localStorage.setItem('token',result.token)
+            localStorage.setItem('refreshToken',result.refreshToken)
             onLogin();
             navigate('/');
         } catch (error) {

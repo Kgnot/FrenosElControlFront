@@ -7,7 +7,7 @@
     "frontendDist": "../dist",
     "devUrl": "http://localhost:5173",
     "beforeDevCommand": "npx cross-env BROWSER=none npm start",
-    "beforeBuildCommand": "npm build"
+    "beforeBuildCommand": "npm run build"
   },
   "app": {
     "windows": [

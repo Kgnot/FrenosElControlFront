@@ -1,15 +1,15 @@
-use reqwest::Client;
+use reqwest::{Client, RequestBuilder};
 use serde::{Deserialize, Serialize};
 use crate::err::http_error::ApiError;
 
 #[derive(Clone)]
-pub struct ApiClient{
-    base_url:String,
+pub struct ApiClient {
+    base_url: String,
     client: Client,
     token: Option<String>,
 }
 
-impl ApiClient{
+impl ApiClient {
     pub fn new(base_url: &str) -> Self {
         let client = Client::new();
         ApiClient {
@@ -39,18 +39,18 @@ impl ApiClient{
         }
     }
 
-    pub async fn get<T: for<'de> Deserialize<'de>>(&self, endpoint: &str,params: Option<Vec<(&str,String)>>) -> Result<T, ApiError> {
-        let url = format!("{}/{}", self.base_url, endpoint);
-
-        let mut req = self.client.get(&url); //.send().await?.json::<T>().await?;
-        // add query params a la request
-        if let Some(params) = params {
-            req = req.query(&params);
-        }
-        // token:
+    fn add_token(&self, req: RequestBuilder) -> RequestBuilder {
         if let Some(token) = &self.token {
-            req = req.bearer_auth(token);
+            req.bearer_auth(token)
+        } else {
+            req
         }
+    }
+
+    async fn send_request<T>(&self, req: RequestBuilder) -> Result<T, ApiError>
+    where
+        T: for<'de> Deserialize<'de>,
+    {
         let res = req.send().await.map_err(ApiError::from)?;
         let status = res.status();
 
@@ -59,6 +59,22 @@ impl ApiClient{
         } else {
             Err(ApiError::Status(status.as_u16()))
         }
+    }
+
+    pub async fn get<T: for<'de> Deserialize<'de>>(
+        &self,
+        endpoint: &str,
+        params: Option<Vec<(&str, String)>>,
+    ) -> Result<T, ApiError> {
+        let url = format!("{}/{}", self.base_url, endpoint);
+        let mut req = self.client.get(&url);
+
+        if let Some(params) = params {
+            req = req.query(&params);
+        }
+
+        let req = self.add_token(req);
+        self.send_request(req).await
     }
 
     pub async fn post<T, B>(&self, endpoint: &str, body: &B) -> Result<T, ApiError>
@@ -67,16 +83,10 @@ impl ApiClient{
         B: Serialize,
     {
         let url = format!("{}/{}", self.base_url, endpoint);
-        let res = self.client
-            .post(&url)
-            .json(body) // manda el body como JSON
-            .send()
-            .await?
-            .json::<T>()
-            .await?;
-        Ok(res)
+        let req = self.client.post(&url).json(body);
+        let req = self.add_token(req);
+        self.send_request(req).await
     }
-
 
     pub async fn put<T, B>(&self, endpoint: &str, body: &B) -> Result<T, ApiError>
     where
@@ -84,20 +94,9 @@ impl ApiClient{
         B: Serialize,
     {
         let url = format!("{}/{}", self.base_url, endpoint);
-        let mut req = self.client.put(&url).json(body);
-
-        if let Some(token) = &self.token {
-            req = req.bearer_auth(token);
-        }
-
-        let res = req.send().await.map_err(ApiError::from)?;
-        let status = res.status();
-
-        if status.is_success() {
-            res.json::<T>().await.map_err(ApiError::from)
-        } else {
-            Err(ApiError::Status(status.as_u16()))
-        }
+        let req = self.client.put(&url).json(body);
+        let req = self.add_token(req);
+        self.send_request(req).await
     }
 
     pub async fn delete<T>(&self, endpoint: &str) -> Result<T, ApiError>
@@ -105,19 +104,8 @@ impl ApiClient{
         T: for<'de> Deserialize<'de>,
     {
         let url = format!("{}/{}", self.base_url, endpoint);
-        let mut req = self.client.delete(&url);
-
-        if let Some(token) = &self.token {
-            req = req.bearer_auth(token);
-        }
-
-        let res = req.send().await.map_err(ApiError::from)?;
-        let status = res.status();
-
-        if status.is_success() {
-            res.json::<T>().await.map_err(ApiError::from)
-        } else {
-            Err(ApiError::Status(status.as_u16()))
-        }
+        let req = self.client.delete(&url);
+        let req = self.add_token(req);
+        self.send_request(req).await
     }
 }

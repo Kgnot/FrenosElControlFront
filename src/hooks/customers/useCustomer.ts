@@ -13,6 +13,7 @@ export const useCustomer = () => {
             setLoading(true);
             try {
                 const response = await customerAPI();
+                console.log(response)
                 setClientes(response);
             } catch (err) {
                 setError(`Error al obtener clientes: ${err}`);
