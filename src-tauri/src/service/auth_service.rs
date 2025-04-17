@@ -1,13 +1,15 @@
+use crate::api::api_response::ApiResponse;
 use crate::err::http_error::ApiError;
 use crate::model::auth::{LoginRequest, LoginResponse};
+use crate::model::refreshRequest::RefreshRequest;
 use crate::repository::auth_repository::AuthRepository;
 
-pub struct AuthService<'a> {
-    repository: AuthRepository<'a>,
+pub struct AuthService {
+    repository: AuthRepository,
 }
 
-impl<'a> AuthService<'a> {
-    pub fn new(repository: AuthRepository<'a>) -> Self {
+impl AuthService {
+    pub fn new(repository: AuthRepository) -> Self {
         AuthService { repository }
     }
 
@@ -19,7 +21,11 @@ impl<'a> AuthService<'a> {
         self.repository.login(&req).await
     }
 
-    pub async fn refresh(&self, token: &str) -> Result<LoginResponse, ApiError> {
-        self.repository.refresh(token).await
+    pub async fn refresh(&self, token: String) -> Result<ApiResponse<LoginResponse>, ApiError> {
+        let req = RefreshRequest {
+            refreshToken: token
+        };
+        println!("refresh token: {}", req.refreshToken);
+        self.repository.refresh(req).await
     }
 }

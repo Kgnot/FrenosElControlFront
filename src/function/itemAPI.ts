@@ -4,12 +4,12 @@ import {getToken} from "./getToken.ts";
 import {safeInvoke} from "./safeInvoke.ts";
 
 export async function itemAPI(): Promise<Product[]> {
-    const token = getToken();
+    // const token = getToken();
     const page = 0;
     const size = 100;
     console.log("ItemAPi")
     const response = await safeInvoke<ApiPageableResponse<Product[]>>("get_all_items", {
-        token,
+        // token,
         page,
         size,
     });

@@ -3,6 +3,14 @@
     width: 100%;
 }
 
+.mainContainerSearchInput
+{
+    display: flex;
+    gap: 8px;
+    align-items: center;
+
+}
+
 .searchInputContainer input {
     width: 100%;
 }
@@ -46,3 +54,4 @@
 .searchDropdown li + li {
     border-top: 1px solid #eee;
 }
+

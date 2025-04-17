@@ -9,7 +9,9 @@ pub async fn get_all_items(page: u32, size: u32, token: String) -> Result<ApiPag
     let client = ApiClient::with_token(BASE_URL, &token);
     let repo = ItemRepository::new(client);
 
-    repo.get_all_items(page, size).await.map_err(|e| format!("Failed to fetch items: {}", e))
+    repo.get_all_items(page, size)
+        .await
+        .map_err(|e| format!("Failed to fetch items: {}", e))
 }
 
 #[tauri::command]

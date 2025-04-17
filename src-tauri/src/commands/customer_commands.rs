@@ -1,7 +1,6 @@
 use crate::api::api_client::ApiClient;
 use crate::api::api_response::{ApiPageableResponse, ApiResponse};
 use crate::commands::base_url::BASE_URL;
-// use crate::err::http_error::ApiError;
 use crate::model::customer::{Customer, CustomerRequest};
 use crate::repository::customer_repository::CustomerRepository;
 
@@ -9,6 +8,7 @@ use crate::repository::customer_repository::CustomerRepository;
 pub async fn get_all_customer(token:String, page:u32, size:u32) -> Result<ApiPageableResponse<Vec<Customer>>,String> {
     let client: ApiClient = ApiClient::with_token(BASE_URL,&token);
     let repository: CustomerRepository = CustomerRepository::new(client);
+
     repository.get_all_customers(page,size)
         .await
         .map_err(|e| e.to_string())

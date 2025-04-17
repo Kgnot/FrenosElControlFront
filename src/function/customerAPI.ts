@@ -2,18 +2,14 @@ import {Customer} from "../entity";
 import {ApiPageableResponse, ApiResponse} from "../entity/wrapper/wrappers.ts";
 import {getToken} from "./getToken.ts";
 import {safeInvoke} from "./safeInvoke.ts";
-
-
-
 // GET /customer (paginado)
-//TODO: implement pagination
 export async function customerAPI(): Promise<Customer[]> {
-    const token = getToken();
+    // const token:string = getToken();
     const page = 0;
     const size = 100;
     console.log("customerAPI");
     const response = await safeInvoke<ApiPageableResponse<Customer[]>>("get_all_customer", {
-        token,
+        // token,
         page,
         size,
     });

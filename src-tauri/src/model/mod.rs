@@ -11,3 +11,4 @@ pub(crate) mod pdf;
 pub(crate) mod purchaseHistory;
 pub(crate) mod salesHistory;
 pub(crate) mod vehicle;
+pub(crate) mod refreshRequest;

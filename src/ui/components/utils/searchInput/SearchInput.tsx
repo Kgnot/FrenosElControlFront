@@ -1,5 +1,6 @@
 import React, {useState, useEffect, useRef} from 'react';
 import './SearchInput.css'
+import {ButtonType1} from "../buttons/ButtonType1.tsx";
 
 interface SearchInputProps<T> {
     searchFunction: (query: string) => Promise<T[]>;
@@ -52,6 +53,7 @@ export const SearchInput = <T, >({
         const handleClickOutside = (event: MouseEvent) => {
             if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
                 setShowDropdown(false);
+
             }
         };
 
@@ -60,15 +62,14 @@ export const SearchInput = <T, >({
     }, []);
 
     const handleSearchButtonClick = () => {
-        // Aquí decides si quieres forzar alguna búsqueda al hacer click en el botón
         if (query.trim()) {
-            setShowDropdown(true);  // Mostrar resultados si hay algo en el input
+            setShowDropdown(true);
         }
     };
 
     return (
         <div ref={containerRef} className={`${className} searchInputContainer`}>
-            <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+            <div className="mainContainerSearchInput">
                 <input
                     type="text"
                     placeholder={placeholder}
@@ -76,9 +77,9 @@ export const SearchInput = <T, >({
                     onChange={(e) => setQuery(e.target.value)}
                     onFocus={() => setShowDropdown(results.length > 0)} // Mostrar resultados si hay, al enfocar
                 />
-                <button type="button" onClick={handleSearchButtonClick}>
-                    🔍 Buscar
-                </button>
+                <ButtonType1 className="searchInputButton" parentMethod={handleSearchButtonClick}>
+                    Buscar
+                </ButtonType1>
             </div>
 
             {isLoading && <p>Cargando...</p>}

@@ -2,16 +2,16 @@ use crate::err::http_error::ApiError;
 use crate::api::api_client::ApiClient;
 use crate::api::api_response::ApiResponse;
 use crate::model::auth::{LoginRequest, LoginResponse};
+use crate::model::refreshRequest::RefreshRequest;
 
-
-pub struct AuthRepository<'a> {
-        client: &'a ApiClient,
+pub struct AuthRepository {
+        client: ApiClient,
     }
 
 
-    impl<'a> AuthRepository<'a>{
+    impl AuthRepository{
 
-        pub fn new(client: &'a ApiClient) -> Self {
+        pub fn new(client:ApiClient) -> Self {
             AuthRepository { client }
         }
 
@@ -20,14 +20,8 @@ pub struct AuthRepository<'a> {
             Ok(wrapped.content)
         }
 
-    pub async fn refresh(&self, refresh_token: &str) -> Result<LoginResponse, ApiError> {
-        #[derive(serde::Serialize)]
-        struct RefreshRequest<'a> {
-            ref_token: &'a str,
-        }
-
-        let req = RefreshRequest { ref_token: refresh_token };
-        self.client.post("/auth/refresh", &req).await
+    pub async fn refresh(&self, refresh_token:RefreshRequest) -> Result<ApiResponse<LoginResponse>, ApiError> {
+        self.client.post("auth/refresh", &refresh_token).await
     }
 }
 

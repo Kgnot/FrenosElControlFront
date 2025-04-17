@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import {Customer} from "../../entity";
 import {customerAPI} from "../../function";
 
-
 export const useCustomer = () => {
     const [clientes, setClientes] = useState<Customer[]>([]);
     const [loading, setLoading] = useState(true);
@@ -13,7 +12,6 @@ export const useCustomer = () => {
             setLoading(true);
             try {
                 const response = await customerAPI();
-                console.log(response)
                 setClientes(response);
             } catch (err) {
                 setError(`Error al obtener clientes: ${err}`);

@@ -9,17 +9,20 @@ export function getToken(): string {
 }
 
 import {invoke} from "@tauri-apps/api/core";
+import {ApiResponse} from "../entity/wrapper/wrappers.ts";
 
 export async function tryRefreshToken(): Promise<boolean> {
-    const refreshToken = localStorage.getItem("refreshToken");
+    const refreshToken:string | null = localStorage.getItem("refreshToken");
+    console.log("refreshToken", refreshToken);
     if (!refreshToken) return false;
 
     try {
-        const response = await invoke<LoginResponse>("refresh", {
+        const response = await invoke<ApiResponse<LoginResponse>>("refresh", {
             refreshToken,
         });
-        localStorage.setItem("token", response.token);
-        localStorage.setItem("refreshToken", response.refreshToken);
+        const data = response.content;
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("refreshToken", data.refreshToken);
         console.log("Token refrescado correctamente");
         return true;
     } catch (e) {
