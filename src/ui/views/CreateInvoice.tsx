@@ -10,9 +10,12 @@ import {
 } from "../components/CreateInvoiceComponents/productsInsertInvoice/ProductInsertInvoice.tsx";
 
 export default function CreateInvoice() {
+
     const methods = useForm<CustomerFormValues>({
         resolver: zodResolver(schema)
     });
+    // Aqui nosotros tenemos el Form como un useForm
+
 
 
     return (

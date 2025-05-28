@@ -1,8 +1,25 @@
 import './InvoiceDetails.css'
-import {SubmitButton} from "../submitButton/SubmitButton.tsx";
 import {CheckBoxDetails} from "./state/CheckBoxDetails.tsx";
+import {useState} from "react";
+import {InvoicePreviewer} from "./component/InvoicePreviewer.tsx";
+import {BlackModal} from "../../utils/modal/BalckModal.tsx";
+import {ButtonType1, ButtonType2} from '../../utils/buttons/index.ts';
+
 
 export const InvoiceDetails = ({className}: { className: string }) => {
+    const [showModal, setShowModal] = useState(false);
+
+    const closePreview = () => {
+        // if (pdfUrl) URL.revokeObjectURL(pdfUrl); // limpia memoria
+        setShowModal(false);
+        // setPdfUrl(null);
+    };
+
+    const generateInvoice = () => {
+        setShowModal(!showModal);
+        console.log("Generando factura");
+    }
+
 
     return (
         <section className={`invoiceDetails ${className}`}>
@@ -22,9 +39,21 @@ export const InvoiceDetails = ({className}: { className: string }) => {
                 />
             </div>
             <div className={"invoiceButtons"}>
-                <SubmitButton/>
-                <button> Previsualizar Factura</button>
+                <ButtonType1 parentMethod={generateInvoice}>
+                    Generar Factura
+                </ButtonType1>
+                {/*Boton para mostrar la factura*/}
+                <ButtonType2 parentMethod={() => setShowModal(!showModal)}>
+                    Previsualizar Factura
+                </ButtonType2>
             </div>
+
+            {/*Apartado del modal*/}
+            <BlackModal
+                visible={showModal}
+                onClose={closePreview}>
+                <InvoicePreviewer onClose={closePreview} pdfUrl={""}/>
+            </BlackModal>
         </section>
     )
 }

@@ -1,5 +1,6 @@
 import {z} from "zod"
 
+// Este es el apartado del Form principal para ingresar una factura
 export const schema = z.object({
     name: z.string().nonempty(),
     identify: z.string(),

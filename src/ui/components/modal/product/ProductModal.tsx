@@ -1,8 +1,7 @@
 import './ProductModal.css'
+import {ButtonType2,ButtonType3} from "../../utils/buttons";
 import {Product} from "../../../../entity";
 import {ReactNode} from "react";
-import {ButtonType2} from "../../utils/buttons/ButtonType2.tsx";
-import {ButtonType3} from "../../utils/buttons/ButtonType3.tsx";
 
 interface ProductModalProps {
     className?: string
@@ -32,4 +31,3 @@ export const ProductModal = ({className, product, children, quitModal}: ProductM
         </>
     )
 }
-
