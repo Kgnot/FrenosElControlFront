@@ -1,3 +1,3 @@
 export interface StatusInvoice {
-    statusId:String
+    statusId:string
 }
