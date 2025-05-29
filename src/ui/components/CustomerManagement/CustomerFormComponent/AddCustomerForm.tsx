@@ -7,13 +7,12 @@ import {InputCustomerForm} from "./InputForm/InputCustomerForm.tsx";
 import './CustomerForm.css';
 
 interface CustomerFormProps {
-    mode: 'add' | 'edit';
     customer: Customer | null;
     onSave: (customer: Customer) => void;
     onCancel: () => void;
 }
 
-export const CustomerForm: React.FC<CustomerFormProps> = ({ mode, customer, onSave, onCancel }) => {
+export const AddCustomerForm: React.FC<CustomerFormProps> = ({customer, onSave, onCancel }) => {
     const {
         control,
         handleSubmit,
@@ -45,7 +44,7 @@ export const CustomerForm: React.FC<CustomerFormProps> = ({ mode, customer, onSa
 
     return (
         <form className="customer-form-modal" onSubmit={handleSubmit(onSubmit)}>
-            <h2>{mode === 'add' ? 'Añadir Cliente' : 'Editar Cliente'}</h2>
+            <h2>Añadir Cliente</h2>
 
             <InputCustomerForm
                 name="name"
@@ -82,7 +81,7 @@ export const CustomerForm: React.FC<CustomerFormProps> = ({ mode, customer, onSa
 
             <div className="form-actions">
                 <button type="button" className="btn-cancel" onClick={onCancel}>Cancelar</button>
-                <button type="submit" className="btn-save">{mode === 'add' ? 'Añadir' : 'Guardar'}</button>
+                <button type="submit" className="btn-save">Guardar</button>
             </div>
         </form>
     );

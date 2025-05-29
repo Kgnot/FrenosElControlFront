@@ -1,9 +1,9 @@
-import  { useState } from "react";
-import {ButtonType1,ButtonType2} from "../components/utils/buttons";
+import {useState} from "react";
+import {ButtonType1/*,ButtonType2*/} from "../components/utils/buttons";
 import {CustomerTable} from "../components/CustomerManagement/CustomerTable/CustomerTable.tsx";
 import './styles/CustomerManagement.css'
 import {BlackModal} from "../components/utils/modal/BalckModal.tsx";
-import {CustomerForm} from "../components/CustomerManagement/CustomerFormComponent/CustomerForm.tsx";
+import {AddCustomerForm} from "../components/CustomerManagement/CustomerFormComponent/AddCustomerForm.tsx";
 
 export interface Customer {
     customerId: number;
@@ -13,22 +13,36 @@ export interface Customer {
     phone: string;
 }
 
+
+const customersDataMock: Customer[] = [
+    {
+        customerId: 1,
+        name: '<NAME>',
+        identify: '123456789',
+        address: 'Calle 123 # 123',
+        phone: '123456789'
+    }
+]
+
+
 export default function CustomerManagement() {
+    const [, forceRender] = useState({});
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [modalMode, setModalMode] = useState<'add' | 'edit'>('add');
     const [selectedCustomer, setSelectedCustomer] = useState<Customer | null>(null);
     const [searchTerm, setSearchTerm] = useState("");
 
     const handleAddCustomer = () => {
-        setModalMode('add');
         setSelectedCustomer(null);
         setIsModalOpen(true);
     };
 
-    const handleEditCustomer = (customer: Customer) => {
-        setModalMode('edit');
-        setSelectedCustomer(customer);
-        setIsModalOpen(true);
+    const handleEditCustomer = (updatedCustomer: Customer) => {
+        const index = customersDataMock.findIndex(c => c.customerId === updatedCustomer.customerId);
+        if (index !== -1) {
+            customersDataMock[index] = updatedCustomer;
+            console.log("Cliente modificado con éxito");
+            forceRender({}); // Forzar renderizado
+        }
     };
 
     const handleCloseModal = () => {
@@ -36,16 +50,10 @@ export default function CustomerManagement() {
         setSelectedCustomer(null);
     };
 
-    const handleSaveCustomer = (customerData: Omit<Customer, 'customerId'>) => {
-        if (modalMode === 'add') {
-            // Lógica para añadir cliente
-            console.log('Añadiendo cliente:', customerData);
-            // Aquí llamarías a tu API para crear el cliente
-        } else {
-            // Lógica para modificar cliente
-            console.log('Modificando cliente:', { ...customerData, customerId: selectedCustomer?.customerId });
-            // Aquí llamarías a tu API para actualizar el cliente
-        }
+    const handleSaveCustomer = (customerData: Customer) => {
+        // Guardamos el cliente
+        console.log(customerData);
+        customersDataMock.push(customerData)
         handleCloseModal();
     };
 
@@ -64,21 +72,19 @@ export default function CustomerManagement() {
                         <ButtonType1 parentMethod={handleAddCustomer}>
                             Añadir Cliente
                         </ButtonType1>
-                        <ButtonType2 parentMethod={() => selectedCustomer && handleEditCustomer(selectedCustomer)}>
-                            Modificar Cliente
-                        </ButtonType2>
                     </div>
                 </div>
-
+                {/* Usamos la tabla, posiblemente aqui es mejor pasarle los datos */}
                 <CustomerTable
+                    modifyCustomerHandler={handleEditCustomer}
                     className={""}
+                    customerData={customersDataMock}
                     onCustomerSelect={setSelectedCustomer}
                     searchTerm={searchTerm}
                 />
 
                 <BlackModal visible={isModalOpen} onClose={handleCloseModal}>
-                    <CustomerForm
-                        mode={modalMode}
+                    <AddCustomerForm
                         customer={selectedCustomer}
                         onSave={handleSaveCustomer}
                         onCancel={handleCloseModal}

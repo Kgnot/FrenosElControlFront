@@ -1,37 +1,45 @@
-import React, { useState, useEffect } from 'react';
-import { TableComponent } from '../../utils/table/TableComponent';
-import {useCustomer} from "../../../../hooks/customers/useCustomer.ts";
+import React, {useState, useEffect} from 'react';
+import {TableComponent} from '../../utils/table/TableComponent';
 import {Customer} from "../../../../entity";
 import {BlackModal} from "../../utils/modal/BalckModal.tsx";
-import {CustomerModal} from "../../modal/customer/CustomerModal.tsx";
+import {ModifyCustomerModal} from "../../modal/customer/ModifyCustomerModal.tsx";
 
 interface CustomerTableProps {
     className: string;
     onCustomerSelect?: (customer: Customer | null) => void;
     searchTerm?: string;
+    customerData: Customer[];
+    modifyCustomerHandler: (customer: Customer) => void;
 }
 
-export const CustomerTable: React.FC<CustomerTableProps> = ({
-                                                                className,
-                                                                onCustomerSelect,
-                                                                searchTerm = ''
-                                                            }) => {
-    const { clientes: data, loading, error } = useCustomer();
+export const CustomerTable: React.FC<CustomerTableProps> = (
+    {
+        className,
+        onCustomerSelect,
+        searchTerm = '',
+        customerData,
+        modifyCustomerHandler
+    }: CustomerTableProps) => {
+    // const { customers: customersDataMock, loading, error } = useCustomer();
     const [selectedCustomer, setSelectedCustomer] = useState<Customer | null>(null);
     const [showDetailModal, setShowDetailModal] = useState(false);
     const [filteredData, setFilteredData] = useState<Customer[]>([]);
 
+
+    const loading = false;
+    const error = null;
+
     // Filtrar datos basado en el término de búsqueda
     useEffect(() => {
-        if (!data) {
+        if (!customerData) {
             setFilteredData([]);
             return;
         }
 
         if (!searchTerm.trim()) {
-            setFilteredData(data);
+            setFilteredData(customerData);
         } else {
-            const filtered = data.filter((customer: Customer) =>
+            const filtered = customerData.filter((customer: Customer) =>
                 customer.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                 customer.identify.includes(searchTerm) ||
                 customer.address.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -39,7 +47,7 @@ export const CustomerTable: React.FC<CustomerTableProps> = ({
             );
             setFilteredData(filtered);
         }
-    }, [data, searchTerm]);
+    }, [customerData, searchTerm]);
 
     const handleRowClick = (row: Customer) => {
         setSelectedCustomer(row);
@@ -106,8 +114,9 @@ export const CustomerTable: React.FC<CustomerTableProps> = ({
             {/* Modal para mostrar detalles del cliente */}
             {selectedCustomer && (
                 <BlackModal visible={showDetailModal} onClose={handleCloseDetailModal}>
-                    <CustomerModal
+                    <ModifyCustomerModal
                         className=""
+                        onModify={modifyCustomerHandler}
                         customer={selectedCustomer}
                         parentMethod={handleCloseDetailModal}  // detallar aqui
                     />

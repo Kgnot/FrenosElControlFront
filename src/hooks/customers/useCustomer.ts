@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import {Customer} from "../../entity";
 import {customerAPI} from "../../function";
 
@@ -20,10 +20,10 @@ export const useCustomer = () => {
             }
         };
 
-        fetchClientes();
+        fetchClientes().then(r => console.log(" xd"+r));
     }, []);
 
-    return { clientes, loading, error };
+    return {customers: clientes, loading, error};
 };
 
 
