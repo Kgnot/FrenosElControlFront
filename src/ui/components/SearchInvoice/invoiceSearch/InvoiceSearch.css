@@ -1,74 +1,177 @@
-.invoiceSearch
-{
+.invoiceSearch {
     position: relative;
     display: flex;
     flex-direction: column;
     padding: 0 2.5em;
+    min-height: 400px; /* Altura mínima fija para evitar movimientos */
 }
 
-.active-filters
-{
-    margin-top: 1em;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5em;
-    height: 100%;
-}
-.filter_buttons_button
-{
+.filter_buttons_button {
     position: relative;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1em;
+    padding-bottom: 1em;
+    border-bottom: 1px solid #e9ecef;
 }
 
-.searchInvoiceButton
-{
-    color:var(--white);
-    background-color:  var(--color-primary);
+.searchInvoiceButton {
+    color: var(--white);
+    background-color: var(--color-primary);
     width: 10em;
+    height: 2.5em; /* Altura fija */
+    border: none;
     border-radius: 15px;
     transition: background-color 0.2s ease-out;
+    cursor: pointer;
+    font-weight: 500;
 }
-.searchInvoiceButton:hover
-{
-    background-color:  var(--select_button);
-    color: var(--color-primary)
 
+.searchInvoiceButton:hover {
+    background-color: var(--select_button);
+    color: var(--color-primary);
 }
-.active-filters-type
-{
+
+.active-filters {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    flex: 1; /* Ocupa todo el espacio disponible */
+    min-height: 300px; /* Altura mínima fija para el área de filtros */
+    overflow-y: auto; /* Scroll si hay muchos filtros */
+}
+
+.active-filters-type {
     position: relative;
     display: flex;
     width: 100%;
-    & span{
-        display:flex;
-        width: 7em;
-        align-items: center;
-    }
-    &:last-child{
-    }
-    & input
-    {
-        width: 85%;
-    }
+    align-items: center;
+    padding: 0.75em 0;
+    border-bottom: 1px solid #f0f0f0;
+    animation: fadeIn 0.2s ease-in-out; /* Animación suave al aparecer */
 }
 
-.waitingFilters
-{
-    display:flex;
+.active-filters-type span {
+    display: flex;
+    width: 7em;
+    min-width: 7em; /* Ancho mínimo fijo */
+    align-items: center;
+    font-weight: 500;
+    margin-right: 1em;
+}
+
+.active-filters-type input,
+.active-filters-type select {
+    flex: 1;
+    padding: 0.5em;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.875em;
+    transition: border-color 0.2s ease;
+}
+
+.active-filters-type input:focus,
+.active-filters-type select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.waitingFilters {
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100%;
-    & img
-    {
-        width: 30%;
-        object-fit: contain;
-        filter: grayscale(0.4);
+    min-height: 250px; /* Altura mínima fija */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.waitingFilters img {
+    width: 30%;
+    max-width: 150px;
+    object-fit: contain;
+    filter: grayscale(0.4);
+    opacity: 0.7;
+}
+
+.waitingFilters h4 {
+    color: gray;
+    margin-top: 1em;
+    text-align: center;
+    font-weight: 400;
+}
+
+/* Animación para la aparición de filtros */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
     }
-    & h4
-    {
-        color:gray;
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .invoiceSearch {
+        padding: 0 1em;
+        min-height: 350px;
+    }
+
+    .filter_buttons_button {
+        flex-direction: column;
+        gap: 1em;
+        align-items: stretch;
+    }
+
+    .searchInvoiceButton {
+        width: 100%;
+    }
+
+    .active-filters-type {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5em;
+    }
+
+    .active-filters-type span {
+        width: 100%;
+        min-width: auto;
+        margin-right: 0;
+    }
+
+    .active-filters {
+        min-height: 250px;
+    }
+
+    .waitingFilters {
+        min-height: 200px;
+    }
+
+    .waitingFilters img {
+        width: 40%;
+    }
+}
+
+@media (max-width: 480px) {
+    .invoiceSearch {
+        padding: 0 0.5em;
+    }
+
+    .active-filters-type span {
+        font-size: 0.875em;
+    }
+
+    .waitingFilters img {
+        width: 50%;
     }
 }

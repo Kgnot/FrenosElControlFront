@@ -1,10 +1,12 @@
 {
+
   "name": "front",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "tauri dev",
+    "tauri:linux-optimize": "RUSTFLAGS='-C target-cpu=native' cargo build --release",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
@@ -16,6 +18,7 @@
     "@hookform/resolvers": "^4.1.2",
     "@tauri-apps/api": "^2.3.0",
     "@tauri-apps/cli-linux-x64-gnu": "^2.5.0",
+    "lucide-react": "^0.511.0",
     "react": "^19.0.0",
     "react-data-table-component": "^7.7.0",
     "react-datepicker": "^8.1.0",

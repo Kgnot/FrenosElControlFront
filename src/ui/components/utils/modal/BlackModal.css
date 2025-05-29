@@ -1,0 +1,55 @@
+/* Estilos para BlackModal */
+.BlackModalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.BlackModalContent {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    max-width: 90vw;
+    max-height: 90vh;
+    overflow: auto;
+    animation: modalFadeIn 0.2s ease-out;
+}
+
+/*@keyframes modalFadeIn {*/
+/*    from {*/
+/*        opacity: 0;*/
+/*        transform: scale(0.1) translateY(-20px);*/
+/*    }*/
+/*    to {*/
+/*        opacity: 1;*/
+/*        transform: scale(1) translateY(0);*/
+/*    }*/
+/*}*/
+
+/* Scrollbar personalizado para el modal */
+.BlackModalContent::-webkit-scrollbar {
+    width: 6px;
+}
+
+.BlackModalContent::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.BlackModalContent::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+}
+
+.BlackModalContent::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}

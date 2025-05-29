@@ -1,47 +1,211 @@
-.HOME_PAGE
-{
-    position: relative;
-    display: flex;
+
+.home-page {
+    padding: 1.5rem;
+    background: var(--background-app);
+    width: 100%;
+    min-height: 100vh;
+    font-family: var(--font-family), serif;
 }
 
-/*Izquierda*/
-.HOME_PAGE_izq
-{
-    position: relative;
+.home-grid {
+    max-width: 1400px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
-    flex:2;
-}
-/*Izquierda - superior*/
-.HOME_PAGE_izq_sup
-{
-    position: relative;
-    flex:1;
-}
-/*Izquierda - inferior*/
-.HOME_PAGE_izq_inf
-{
-    position: relative;
-    flex:1;
-}
-/*Derecha*/
-.HOME_PAGE_der
-{
-    position: relative;
-    flex:1;
-    display: flex;
-    flex-direction: column;
-}
-/*Derecha - superior*/
-.HOME_PAGE_der_sup
-{
-    position: relative;
-    flex:1;
-}
-/*Derecha - inferior*/
-.HOME_PAGE_der_inf
-{
-    position: relative;
-    flex:1;
+    gap: 2rem;
 }
 
+.home-header {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    border-radius: var(--radius-xl);
+    padding: 2rem;
+    color: white;
+    box-shadow: var(--shadow-lg);
+}
+
+.home-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+.content-left {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.content-right {
+    position: sticky;
+    top: 1.5rem;
+    height: 100%;
+    /*background: #0ea5e9;*/
+}
+
+/* Profile + Info Container con efecto hover */
+.profile-info-wrapper {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.info-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(15, 33, 47, 0.95); /* Color primary con transparencia */
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    transform: translateY(100%);
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+/*.profile-info-wrapper:hover .info-overlay {*/
+/*    opacity: 1;*/
+/*    transform: translateY(0);*/
+/*}*/
+
+/*!* Efecto en el profile al hacer hover *!*/
+/*.profile-info-wrapper:hover .profile-container {*/
+/*    transform: scale(0.95);*/
+/*    filter: blur(2px);*/
+/*}*/
+
+/* Estilo especial para Info cuando está en overlay */
+.info-overlay .info-container {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: var(--shadow-lg);
+    transform: scale(0.95);
+    transition: transform 0.3s ease;
+    max-height: 90%;
+    overflow-y: auto;
+}
+
+/*.profile-info-wrapper:hover .info-overlay .info-container {*/
+/*    transform: scale(1);*/
+/*}*/
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .home-content {
+        grid-template-columns: 1fr;
+    }
+
+    .content-right {
+        position: static;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+    }
+
+    .profile-info-wrapper {
+        grid-column: 1;
+    }
+
+    /* En tablet/desktop pequeño, agregamos Info normal al lado */
+    .content-right::after {
+        content: '';
+        grid-column: 2;
+        display: block;
+    }
+
+    /* Deshabilitamos el overlay en tablet */
+    .info-overlay {
+        position: static;
+        opacity: 1;
+        transform: none;
+        background: none;
+        backdrop-filter: none;
+        grid-column: 2;
+        padding: 0;
+    }
+
+    .info-overlay .info-container {
+        background: var(--surface);
+        border: 1px solid var(--border-light);
+        transform: none;
+        max-height: none;
+        overflow-y: visible;
+    }
+
+    /*.profile-info-wrapper:hover .profile-container {*/
+    /*    transform: none;*/
+    /*    filter: none;*/
+    /*}*/
+}
+
+@media (max-width: 768px) {
+    .home-page {
+        padding: 1rem;
+    }
+
+    .home-grid {
+        gap: 1.5rem;
+    }
+
+    .home-header {
+        padding: 1.5rem;
+    }
+
+    .content-right {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .profile-info-wrapper {
+        order: 1;
+    }
+
+    /* En móvil mostramos ambos normalmente */
+    .info-overlay {
+        position: static;
+        opacity: 1;
+        transform: none;
+        background: none;
+        backdrop-filter: none;
+        order: 2;
+    }
+}
+
+/* Indicador visual de que se puede hacer hover */
+.profile-info-wrapper::before {
+    content: '📞';
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: var(--color-primary);
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    z-index: 5;
+    opacity: 0.8;
+    box-shadow: var(--shadow-md);
+}
+
+/*.profile-info-wrapper:hover::before {*/
+/*    opacity: 0;*/
+/*    transform: scale(0.8);*/
+/*}*/
+
+@media (max-width: 1024px) {
+    .profile-info-wrapper::before {
+        display: none;
+    }
+}

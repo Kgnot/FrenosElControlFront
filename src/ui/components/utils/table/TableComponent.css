@@ -1,0 +1,74 @@
+/* TableComponent.css */
+
+.table-component-wrapper {
+    width: 100%;
+}
+
+.custom-data-table {
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Estilos para las filas */
+.custom-data-table .rdt_TableRow {
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.custom-data-table .rdt_TableRow:hover {
+    background-color: #f5f5f5 !important;
+}
+
+/* Fila seleccionada */
+.custom-data-table .rdt_TableRow.selected-row {
+    background-color: #e3f2fd !important;
+    border-left: 4px solid #22445e;
+    font-weight: 500;
+}
+
+.custom-data-table .rdt_TableRow.selected-row:hover {
+    background-color: #bbdefb !important;
+}
+
+/* Header de la tabla */
+.custom-data-table .rdt_TableHead {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.custom-data-table .rdt_TableHeadRow {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    color: #495057;
+}
+
+.custom-data-table .rdt_TableCol {
+    padding: 12px 16px;
+}
+
+.custom-data-table .rdt_TableCell {
+    padding: 12px 16px;
+}
+
+/* Paginación */
+.custom-data-table .rdt_Pagination {
+    border-top: 1px solid #dee2e6;
+    background-color: #f8f9fa;
+}
+
+/* Estilos adicionales para mejor visualización */
+.custom-data-table .rdt_Table {
+    font-size: 14px;
+}
+
+/* Hacer que toda la fila sea clickeable */
+.custom-data-table .rdt_TableRow {
+    user-select: none;
+}
+
+/* Animación suave para la selección */
+.custom-data-table .rdt_TableRow {
+    transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
