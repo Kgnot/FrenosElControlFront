@@ -16,6 +16,7 @@
     "@hookform/resolvers": "^4.1.2",
     "@tauri-apps/api": "^2.3.0",
     "@tauri-apps/cli-linux-x64-gnu": "^2.5.0",
+    "lucide-react": "^0.511.0",
     "react": "^19.0.0",
     "react-data-table-component": "^7.7.0",
     "react-datepicker": "^8.1.0",
