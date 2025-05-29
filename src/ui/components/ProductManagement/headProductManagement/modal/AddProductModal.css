@@ -1,0 +1,68 @@
+.add-product-modal {
+    padding: 2rem;
+    min-width: 400px;
+    max-width: 500px;
+    background: white;
+    border-radius: 8px;
+}
+
+.add-product-modal h3 {
+    margin: 0 0 1.5rem 0;
+    color: #333;
+    font-size: 1.5rem;
+    text-align: center;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 0.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #555;
+    font-size: 0.9rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #e1e1e1;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    box-sizing: border-box;
+}
+
+
+.form-group input::placeholder {
+    color: #999;
+    font-style: italic;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #f0f0f0;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .add-product-modal {
+        min-width: 300px;
+        padding: 1.5rem;
+    }
+
+    .add-product-modal h3 {
+        font-size: 1.3rem;
+    }
+
+    .form-group input {
+        padding: 0.6rem;
+    }
+}
