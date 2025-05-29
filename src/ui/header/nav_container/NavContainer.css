@@ -1,5 +1,5 @@
-.nav
-{
+
+.nav {
     position: relative;
     display: flex;
     background-color: var(--color-primary);
@@ -7,27 +7,44 @@
     flex-direction: column;
     justify-content: space-between;
     text-align: start;
-    color:white;
+    color: white;
+    height: 100%;
 }
 
-.buttons_nav
-{
+.nav.collapsed {
+    border-radius: 0;
+    text-align: center;
+}
+
+.buttons_nav {
     display: flex;
     flex-direction: column;
-    padding: 4rem 0 0 0;
+    padding: 2rem 0 0 0;
     align-items: center;
-    gap: 1em;
-}
-.close
-{
-    background-color: var(--red_app);
-    color: white;
-    width: 100%;
-    height: 3em;
+    gap: 0.5em;
 }
 
-.buttons_nav button.active {
-    background-color: var(--select_button); /* Verde */
+.nav-link {
+    text-decoration: none;
+    width: 100%;
+}
+
+.close-btn {
+    background-color: var(--color-danger);
     color: white;
-    font-weight: bold;
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: var(--radius);
+    transition: background-color 0.15s ease; /* Solo animar lo que necesitas */
+    border: none;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    background-color: var(--color-danger-light);
+}
+
+.nav.collapsed .close-btn {
+    padding: 0.5rem;
+    font-size: 1.1rem;
 }

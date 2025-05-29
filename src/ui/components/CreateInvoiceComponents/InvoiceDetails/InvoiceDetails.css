@@ -1,66 +1,95 @@
-.invoiceDetails {
+.invoice-details {
     padding: 1.5rem;
-    border: 1px solid #e0e0e0;
-    border-radius: 12px;
-    background-color: #fff;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    justify-content: center;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+    height: fit-content;
 }
 
-.invoiceDetails h2 {
-    font-size: 1.3rem;
-    font-weight: bold;
+/* Header */
+.invoice-details-header {
+    text-align: center;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.invoice-details-header h2 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem 0;
+    color: var(--text-primary);
+    font-family: var(--font-family), serif;
+}
+
+.invoice-details-header p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
     margin: 0;
-    color: #1a1a1a;
+    font-weight: 400;
 }
 
-.detailsInvoice {
+/* Opciones */
+.invoice-options {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.25rem;
+    flex: 1;
 }
 
-.invoiceDetails .button-group {
+/* Botones de acción */
+.invoice-actions {
     display: flex;
-    gap: 1rem;
-    align-items: center;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-light);
 }
 
-.invoiceDetails button {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.9rem;
-    padding: 0.6rem 1rem;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
+/* Responsive Design */
+@media (max-width: 768px) {
+    .invoice-details {
+        padding: 1.25rem;
+        gap: 1.25rem;
+    }
+
+    .invoice-details-header h2 {
+        font-size: 1.25rem;
+    }
+
+    .invoice-details-header p {
+        font-size: 0.85rem;
+    }
+
+    .invoice-actions {
+        gap: 0.5rem;
+    }
+
+    .invoice-actions button {
+        padding: 0.65rem 0.85rem;
+        font-size: 0.85rem;
+    }
 }
 
-.invoiceDetails button:first-child {
-    background-color: black;
-    color: white;
-    border: none;
-}
+@media (max-width: 480px) {
+    .invoice-details {
+        padding: 1rem;
+    }
 
-.invoiceDetails button:first-child:hover {
-    background-color: #333;
-}
+    .invoice-details-header {
+        text-align: left;
+        padding-bottom: 0.75rem;
+    }
 
-.invoiceDetails button:last-child {
-    background-color: white;
-    color: #1a1a1a;
-    border: 1px solid #ddd;
-}
+    .invoice-details-header h2 {
+        font-size: 1.1rem;
+    }
 
-.invoiceDetails button:last-child:hover {
-    background-color: #f5f5f5;
-}
-.invoiceButtons
-{
-    position: relative;
-    display: flex;
-    gap: 1em;
+    .invoice-options {
+        gap: 1rem;
+    }
 }

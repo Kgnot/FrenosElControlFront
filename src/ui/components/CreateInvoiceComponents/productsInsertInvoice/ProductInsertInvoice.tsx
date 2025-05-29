@@ -1,3 +1,4 @@
+
 import './ProductInsertInvoice.css'
 import {useState, useEffect} from 'react';
 
@@ -156,10 +157,18 @@ export const ProductInsertInvoice = (
         };
     };
 
+    // Calcular total de la factura
+    const invoiceTotal = products.reduce((sum, product) => sum + product.total, 0);
+
     return (
         <section className={`productInsertInvoice ${className}`}>
             <div className={"titleProductInsertInvoice"}>
-                <h4>Items de la factura</h4>
+                <div className="title-row">
+                    <h4>Items de la factura</h4>
+                    <div className="invoice-total">
+                        <span>Total: ${invoiceTotal.toFixed(2)}</span>
+                    </div>
+                </div>
                 <div>
                     <ButtonType1 parentMethod={handleAddProduct}>Añadir item</ButtonType1>
                     <ButtonType2 parentMethod={handleEditProduct}>Modificar item</ButtonType2>

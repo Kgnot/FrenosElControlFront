@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root {
@@ -17,15 +18,89 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
-    /* Custom props*/
+    /* === COLORES === */
+
+    /* Colores primarios */
     --color-primary: #0f212f;
-    --white: #fff;
-    --gray_app: #e8e8ef;
-    --gray_app2:#f3f4f6 ;
-    --red_app:#cf353b;
-    --blue_app: #3c3b80;
+    --color-primary-light: #1a3447;
+    --color-primary-dark: #081119;
+
+    /* Colores secundarios */
+    --color-secondary: #3c3b80;
+    --color-secondary-light: #5856a8;
+    --color-secondary-dark: #2b2a5f;
+
+    /* Colores de acento */
+    --color-accent: #4f46e5;
+    --color-accent-light: #6366f1;
+
+    /* Estados */
+    --color-danger: #cf353b;
+    --color-danger-light: #dc4c52;
+    --color-success: #059669;
+    --color-success-light: #10b981;
+    --color-warning: #d97706;
+    --color-warning-light: #f59e0b;
+    --color-info: #0ea5e9;
+    --color-info-light: #38bdf8;
+
+    /* Grises */
+    --white: #ffffff;
+    --gray-50: #f9fafb;
+    --gray-100: #f3f4f6;
+    --gray-200: #e5e7eb;
+    --gray-300: #e8e8ef;
+    --gray-400: #9ca3af;
+    --gray-500: #6b7280;
+    --gray-600: #4b5563;
+    --gray-700: #374151;
+    --gray-800: #1f2937;
+    --gray-900: #111827;
+
+    /* Fondos */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f9fafb;
+    --bg-card: #ffffff;
+    --surface: #ffffff;  /* Nuevo */
+
+    /* Bordes */
+    --border-color: #e5e7eb;
+    --border-color-focus: var(--color-primary);
+    --border: var(--border-color);  /* Alias */
+    --border-light: #f3f4f6;  /* Nuevo */
+
+    /* Texto */
+    --text-primary: #111827;
+    --text-secondary: #6b7280;
+    --text-light: #ffffff;
+
+    /* Variables de compatibilidad */
+    --gray_app: var(--gray-300);
+    --gray_app2: var(--gray-100);
+    --gray_app3: var(--gray-200);  /* Nuevo */
+    --red_app: var(--color-danger);
+    --blue_app: var(--color-secondary);
     --select_button: rgba(225, 225, 225, 0.8);
+    --background-app: var(--bg-secondary);  /* Nuevo */
+
+    /* Transiciones simples */
+    --transition: 0.2s ease;
+
+    /* Border radius */
+    --radius: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;  /* Nuevo */
+    --radius-full: 50px;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);  /* Nuevo */
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);  /* Nuevo */
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);  /* Nuevo */
+
+    /* Utilidades */
+    --font-family: "Raleway", system-ui, Avenir, Helvetica, Arial, serif;  /* Nuevo */
 }
+
 #root {
     display: flex;
     flex-direction: column;
@@ -33,102 +108,149 @@
     min-height: 100vh;
 }
 
-.PAGE
-{
+.PAGE {
     height: 100%;
 }
 
-.hijo
-{
-    border-radius: 15px;
+.hijo {
+    border-radius: var(--radius-lg);
     margin: 0.8em;
-    border: 1px solid var(--gray_app);
-}
-/* Atributos propios de html*/
-/* Estilo general para todos los select */
-select {
-    appearance: none;
-    width: 100%;
-    max-width: 240px;
-    padding: 10px 14px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #ffffff;
-    font-size: 14px;
-    color: #333;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-/* Flecha personalizada */
-select {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23333' class='bi bi-chevron-down' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 12px center;
-    background-size: 12px;
-}
-select:focus {
-    outline: none;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-card);
 }
 
-/* Cuando está deshabilitado */
-select:disabled {
-    background-color: #eee;
-    color: #888;
-    cursor: not-allowed;
-}
-/* Opciones internas (puedes personalizar si usas un dropdown custom) */
-option {
-    padding: 8px;
-    background-color: #fff;
-    color: #333;
-}
-
-select:hover {
-    background-color: #f0f0f0;
-}
-select::-ms-expand {
-    display: none;
-}
-
+/* === BOTONES SIMPLES === */
 button {
     font-family: inherit;
     font-size: inherit;
-    font-weight: inherit;
-    font-style: inherit;
-    line-height: inherit;
+    font-weight: 500;
     border: none;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: var(--radius);
+    padding: 0.75rem 1.5rem;
+    transition: var(--transition);
+    background-color: var(--color-primary);
+    color: var(--text-light);
 }
 
-input {
-    background-color: white;
-    border: 1px solid #e8e8ef;
-    padding: 0.7em 0.2em 0.4em 0.5em;
-    border-radius: 5px;
-    transition: all 0.2s ease;
+button:hover {
+    background-color: var(--color-primary-light);
+}
+
+/* Variantes de botones */
+.btn-secondary {
+    background-color: var(--color-secondary);
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-secondary-light);
+}
+
+.btn-success {
+    background-color: var(--color-success);
+}
+
+.btn-success:hover {
+    background-color: var(--color-success-light);
+}
+
+.btn-danger {
+    background-color: var(--color-danger);
+}
+
+.btn-danger:hover {
+    background-color: var(--color-danger-light);
+}
+
+.btn-outline {
+    background-color: transparent;
+    border: 1px solid var(--color-primary);
     color: var(--color-primary);
+}
+
+.btn-outline:hover {
+    background-color: var(--color-primary);
+    color: var(--text-light);
+}
+
+/* === INPUTS SIMPLES === */
+input {
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    padding: 0.75rem;
+    border-radius: var(--radius);
+    transition: var(--transition);
+    color: var(--text-primary);
+    font-size: inherit;
+    width: 100%;
 }
 
 input:focus {
     outline: none;
-    border: 1px solid var(--color-primary);
+    border-color: var(--border-color-focus);
 }
 
+input:hover {
+    border-color: var(--gray-400);
+}
+
+/* === SELECT SIMPLE === */
+select {
+    appearance: none;
+    width: 100%;
+    max-width: 240px;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    background-color: var(--bg-primary);
+    font-size: inherit;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: var(--transition);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23374151' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+}
+
+select:focus {
+    outline: none;
+    border-color: var(--border-color-focus);
+}
+
+select:hover {
+    border-color: var(--gray-400);
+}
+
+select:disabled {
+    background-color: var(--gray-100);
+    color: var(--text-secondary);
+    cursor: not-allowed;
+}
+
+option {
+    padding: 0.5rem;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+select::-ms-expand {
+    display: none;
+}
 
 body {
     margin: 0;
     display: flex;
     min-width: 320px;
     min-height: 100vh;
-    background-color: white;
+    background-color: var(--bg-secondary);
 }
 
-/* Celdas de react-data-table*/
+/* === TABLAS SIMPLES === */
 .rdt_TableCell {
-    transition: background-color 0.3s ease;
+    transition: var(--transition);
 }
 
 .rdt_TableCell:hover {
-    background-color: #f0f0f0;
+    background-color: var(--gray-50);
 }

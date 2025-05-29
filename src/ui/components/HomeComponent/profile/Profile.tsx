@@ -1,12 +1,10 @@
-import './Profile.css'
-import {UpPerfil} from "./upPerfil/UpPerfil.tsx";
+import './Profile.css';
+import { UpPerfil } from "./upPerfil/UpPerfil.tsx";
 
-
-export const Profile = ({className}:{className:string}) => {
-
-    return  (
-        <section className={className}>
-            <UpPerfil className={"Profile_sup"}/>
-        </section>
-    )
-}
+export const Profile = () => {
+    return (
+        <div className="profile-container">
+            <UpPerfil />
+        </div>
+    );
+};

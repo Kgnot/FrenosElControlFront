@@ -1,19 +1,53 @@
-.APP
-{
+.APP {
     position: relative;
     display: flex;
     height: 100vh;
     overflow: hidden;
+    background: var(--bg-secondary);
 }
-.header_view
-{
-    flex:1
+
+.header_view {
+    /* Ya no necesitamos flex aquí, el ancho se controla desde Header.css */
+    z-index: 100;
 }
-.pages_view
-{
+
+.pages_view {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex:5;
+    flex: 1;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    overflow: hidden;
+}
+
+/* Efecto cuando la sidebar está colapsada */
+.APP:has(.header.collapsed) .pages_view {
+    margin-left: 1rem;
+}
+
+/* Overlay para móviles cuando el menú está abierto */
+.mobile-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.mobile-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+@media (max-width: 768px) {
+    .pages_view {
+        margin: 0;
+        border-radius: 0;
+    }
 }

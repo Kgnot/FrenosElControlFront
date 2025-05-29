@@ -5,7 +5,7 @@ import CreateInvoice from "../ui/views/CreateInvoice"
 import SearchInvoice from "../ui/views/SearchInvoice"
 import CustomerManagement from "../ui/views/CustomerManagement"
 import ProductManagement from "../ui/views/ProductManagement"
-import {Header} from "../ui/header/Header"
+import {Header} from "../ui/header/Header.tsx"
 
 function App() {
     return (

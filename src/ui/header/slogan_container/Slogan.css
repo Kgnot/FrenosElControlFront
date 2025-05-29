@@ -1,33 +1,30 @@
-
-.slogan
-{
+.slogan {
     display: flex;
     justify-content: center;
     align-items: center;
+    color: var(--text-light);
+    transition: var(--transition);
+}
+
+.slogan-text {
+    font-size: 1.2rem;
+    font-weight: 600;
     letter-spacing: 1px;
+    text-align: center;
+}
+
+.slogan.collapsed {
+    justify-content: center;
+}
+
+.slogan-icon {
+    font-size: 1.8rem;
     font-weight: bold;
-}
-
-.slogan span {
-    display: inline-block;
-    transition: transform 0.5s ease;
-}
-
-.wave {
-    animation: waveMove 1.5s ease forwards;
-}
-
-@keyframes waveMove {
-    0% {
-        transform: translateY(0);
-    }
-    30% {
-        transform: translateY(-10px);
-    }
-    60% {
-        transform: translateY(0);
-    }
-    100% {
-        transform: translateY(0);
-    }
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
