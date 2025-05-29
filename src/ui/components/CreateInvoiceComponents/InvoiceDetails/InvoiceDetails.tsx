@@ -1,30 +1,48 @@
-import './InvoiceDetails.css'
-import {CheckBoxDetails} from "./state/CheckBoxDetails.tsx";
-import {useState} from "react";
-import {InvoicePreviewer} from "./component/InvoicePreviewer.tsx";
-import {BlackModal} from "../../utils/modal/BalckModal.tsx";
-import {ButtonType1, ButtonType2} from '../../utils/buttons/index.ts';
 
+import './InvoiceDetails.css';
+import { CheckBoxDetails } from "./state/CheckBoxDetails.tsx";
+import { useState } from "react";
+import { InvoicePreviewer } from "./component/InvoicePreviewer.tsx";
+import { BlackModal } from "../../utils/modal/BalckModal.tsx";
+import { ButtonType1, ButtonType2 } from '../../utils/buttons';
 
-export const InvoiceDetails = ({className}: { className: string }) => {
+interface InvoiceDetailsProps {
+    className?: string;
+    isGenerating?: boolean;
+    onGenerate?: () => void;
+}
+
+export const InvoiceDetails = ({
+                                   className = "",
+                                   isGenerating = false,
+                                   onGenerate
+                               }: InvoiceDetailsProps) => {
     const [showModal, setShowModal] = useState(false);
 
     const closePreview = () => {
-        // if (pdfUrl) URL.revokeObjectURL(pdfUrl); // limpia memoria
         setShowModal(false);
-        // setPdfUrl(null);
     };
 
-    const generateInvoice = () => {
-        setShowModal(!showModal);
-        console.log("Generando factura");
-    }
+    const handleGenerateInvoice = () => {
+        if (isGenerating) return;
 
+        console.log("Generando factura");
+        setShowModal(true); // También abre el modal
+        onGenerate?.();
+    };
+
+    const handlePreviewInvoice = () => {
+        setShowModal(true);
+    };
 
     return (
-        <section className={`invoiceDetails ${className}`}>
-            <h2> Detalles Factura</h2>
-            <div className={"detailsInvoice"}>
+        <section className={`invoice-details ${className}`}>
+            <header className="invoice-details-header">
+                <h2>Detalles de la Factura</h2>
+                <p>Configure las opciones de generación</p>
+            </header>
+
+            <div className="invoice-options">
                 <CheckBoxDetails
                     title="Estado de la factura"
                     check1="Completado"
@@ -38,22 +56,29 @@ export const InvoiceDetails = ({className}: { className: string }) => {
                     groupName="tamanoFactura"
                 />
             </div>
-            <div className={"invoiceButtons"}>
-                <ButtonType1 parentMethod={generateInvoice}>
-                    Generar Factura
+
+            <div className="invoice-actions">
+                <ButtonType1
+                    parentMethod={handleGenerateInvoice}
+                    // disabled={isGenerating}
+                >
+                    {isGenerating ? 'Generando...' : 'Generar Factura'}
                 </ButtonType1>
-                {/*Boton para mostrar la factura*/}
-                <ButtonType2 parentMethod={() => setShowModal(!showModal)}>
-                    Previsualizar Factura
+
+                <ButtonType2 parentMethod={handlePreviewInvoice}>
+                    Previsualizar
                 </ButtonType2>
             </div>
 
-            {/*Apartado del modal*/}
             <BlackModal
                 visible={showModal}
-                onClose={closePreview}>
-                <InvoicePreviewer onClose={closePreview} pdfUrl={""}/>
+                onClose={closePreview}
+            >
+                <InvoicePreviewer
+                    onClose={closePreview}
+                    pdfUrl=""
+                />
             </BlackModal>
         </section>
-    )
-}
+    );
+};

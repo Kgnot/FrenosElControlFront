@@ -1,46 +1,47 @@
-import './ProductInsertInvoice.css'
-import {useState, useEffect} from 'react';
-
-import {TableComponent} from "../../utils/table/TableComponent.tsx";
-import {ItemInvoiceModal} from "./modal/item/ItemInvoiceModal.tsx";
-import {ButtonType1, ButtonType2, ButtonType3} from "../../utils/buttons";
-import {Invoice} from "../../../../entity/Invoice.ts";
-import {InvoiceItems} from "../../../../entity/InvoiceItems.ts";
-import {ProductFormValues} from "../../../../form/ProductForm.ts";
+import './ProductInsertInvoice.css';
+import { useState, useEffect } from 'react';
+import { TableComponent } from "../../utils/table/TableComponent.tsx";
+import { ItemInvoiceModal } from "./modal/item/ItemInvoiceModal.tsx";
+import { ButtonType1, ButtonType2, ButtonType3 } from "../../utils/buttons";
+import { Invoice } from "../../../../entity/Invoice.ts";
+import { InvoiceItems } from "../../../../entity/InvoiceItems.ts";
+import { ProductFormValues } from "../../../../form/ProductForm.ts";
 
 interface ProductInsertInvoiceProps {
-    invoice?: Invoice
+    invoice?: Invoice;
     className?: string;
 }
 
-export const ProductInsertInvoice = (
-    {
-        invoice,
-        className
-    }: ProductInsertInvoiceProps) => {
+export const ProductInsertInvoice = ({ invoice, className = "" }: ProductInsertInvoiceProps) => {
     const [products, setProducts] = useState<InvoiceItems[]>([]);
     const [selectedProduct, setSelectedProduct] = useState<InvoiceItems | null>(null);
     const [modalOpen, setModalOpen] = useState(false);
     const [modalMode, setModalMode] = useState<'add' | 'edit'>('add');
 
-    // useEffect para cargar los productos cuando se pasa una invoice
+    // Cargar productos cuando se pasa una invoice
     useEffect(() => {
-        if (invoice && invoice.invoiceItems) {
-            setProducts(invoice.invoiceItems);
-        } else {
-            setProducts([]);
-        }
+        setProducts(invoice?.invoiceItems || []);
     }, [invoice]);
 
     const columns = [
-        {name: 'Id', selector: (row: InvoiceItems) => `${row.id[0]}-${row.id[1]}`},
-        {name: 'Código del producto', selector: (row: InvoiceItems) => row.item.code},
-        {name: 'Descripción', selector: (row: InvoiceItems) => row.item.description},
-        {name: 'Cantidad', selector: (row: InvoiceItems) => row.quantity},
-        {name: 'Precio', selector: (row: InvoiceItems) => row.price},
-        {name: 'Valor unitario', selector: (row: InvoiceItems) => row.unitValue},
-        {name: 'Total', selector: (row: InvoiceItems) => row.total}
+        { name: 'ID', selector: (row: InvoiceItems) => `${row.id[0]}-${row.id[1]}`, width: '80px' },
+        { name: 'Código', selector: (row: InvoiceItems) => row.item.code, width: '120px' },
+        { name: 'Descripción', selector: (row: InvoiceItems) => row.item.description },
+        { name: 'Cant.', selector: (row: InvoiceItems) => row.quantity, width: '80px' },
+        { name: 'Precio', selector: (row: InvoiceItems) => `$${row.price.toFixed(2)}`, width: '100px' },
+        { name: 'Valor Unit.', selector: (row: InvoiceItems) => `$${row.unitValue.toFixed(2)}`, width: '110px' },
+        { name: 'Total', selector: (row: InvoiceItems) => `$${row.total.toFixed(2)}`, width: '100px' }
     ];
+
+    // Generar ID único para tabla
+    const generateTableId = (invoiceItems: InvoiceItems): number => {
+        return invoiceItems.id[0] * 10000 + invoiceItems.id[1];
+    };
+
+    // Encontrar producto por ID de tabla
+    const findProductByTableId = (tableId: number): InvoiceItems | undefined => {
+        return products.find(p => generateTableId(p) === tableId);
+    };
 
     const handleAddProduct = () => {
         setSelectedProduct(null);
@@ -50,6 +51,7 @@ export const ProductInsertInvoice = (
 
     const handleEditProduct = () => {
         if (!selectedProduct) {
+            // TODO: Reemplazar con toast/notification component
             alert('Por favor selecciona un producto para modificar');
             return;
         }
@@ -59,10 +61,12 @@ export const ProductInsertInvoice = (
 
     const handleDeleteProduct = () => {
         if (!selectedProduct) {
+            // TODO: Reemplazar con toast/notification component
             alert('Por favor selecciona un producto para eliminar');
             return;
         }
 
+        // TODO: Reemplazar con modal de confirmación personalizado
         const confirmDelete = window.confirm(
             `¿Estás seguro de que deseas eliminar el producto "${selectedProduct.item.code}"?`
         );
@@ -75,15 +79,17 @@ export const ProductInsertInvoice = (
         }
     };
 
-    const handleRowClick = (row: InvoiceItems) => {
-        setSelectedProduct(row);
+    const handleRowClick = (row: any) => {
+        const originalProduct = findProductByTableId(row.id);
+        if (originalProduct) {
+            setSelectedProduct(originalProduct);
+        }
     };
 
     const handleSaveProduct = (formData: ProductFormValues) => {
         const total = formData.quantity * formData.unitValue;
 
         if (modalMode === 'add') {
-            // Generar nuevo ID compuesto
             const invoiceId = invoice?.id || 1;
             const maxItemId = products.length > 0
                 ? Math.max(...products.map(p => p.id[1]))
@@ -92,7 +98,7 @@ export const ProductInsertInvoice = (
 
             const newProduct: InvoiceItems = {
                 id: [invoiceId, newItemId],
-                price: formData.unitValue, // Usar unitValue como price por ahora
+                price: formData.unitValue,
                 quantity: formData.quantity,
                 unitValue: formData.unitValue,
                 total,
@@ -103,11 +109,12 @@ export const ProductInsertInvoice = (
                     description: formData.productDescription
                 }
             };
+
             setProducts(prev => [...prev, newProduct]);
-        } else {
+        } else if (selectedProduct) {
             setProducts(prev =>
                 prev.map(product =>
-                    product.id[0] === selectedProduct!.id[0] && product.id[1] === selectedProduct!.id[1]
+                    product.id[0] === selectedProduct.id[0] && product.id[1] === selectedProduct.id[1]
                         ? {
                             ...product,
                             price: formData.unitValue,
@@ -129,67 +136,81 @@ export const ProductInsertInvoice = (
         setSelectedProduct(null);
     };
 
-    // Función auxiliar para crear datos adaptados para el TableComponent
-    const getTableData = () => {
-        return products.map(product => ({
-            ...product,
-            // Crear un id numérico único para el TableComponent
-            id: product.id[0] * 10000 + product.id[1]
-        }));
+    const handleCloseModal = () => {
+        setModalOpen(false);
+        setSelectedProduct(null);
     };
 
-    // Función para obtener el ID seleccionado adaptado
-    const getSelectedRowId = () => {
-        if (!selectedProduct) return undefined;
-        return selectedProduct.id[0] * 10000 + selectedProduct.id[1];
-    };
+    // Preparar datos para la tabla
+    const tableData = products.map(product => ({
+        ...product,
+        id: generateTableId(product)
+    }));
 
-    // Convertir InvoiceItems a ProductFormValues para el modal
-    const getProductFormData = (): ProductFormValues | null => {
-        if (!selectedProduct) return null;
+    // ID seleccionado para la tabla
+    const selectedRowId = selectedProduct ? generateTableId(selectedProduct) : undefined;
 
-        return {
-            productCode: selectedProduct.item.code,
-            productDescription: selectedProduct.item.description,
-            quantity: selectedProduct.quantity,
-            unitValue: selectedProduct.unitValue
-        };
-    };
+    // Datos del formulario para el modal
+    const productFormData: ProductFormValues | null = selectedProduct ? {
+        productCode: selectedProduct.item.code,
+        productDescription: selectedProduct.item.description,
+        quantity: selectedProduct.quantity,
+        unitValue: selectedProduct.unitValue
+    } : null;
+
+    // Calcular total de la factura
+    const invoiceTotal = products.reduce((sum, product) => sum + product.total, 0);
 
     return (
-        <section className={`productInsertInvoice ${className}`}>
-            <div className={"titleProductInsertInvoice"}>
-                <h4>Items de la factura</h4>
-                <div>
-                    <ButtonType1 parentMethod={handleAddProduct}>Añadir item</ButtonType1>
-                    <ButtonType2 parentMethod={handleEditProduct}>Modificar item</ButtonType2>
-                    <ButtonType3 parentMethod={handleDeleteProduct}>Eliminar Item</ButtonType3>
+        <section className={`product-insert-invoice ${className}`}>
+            <header className="product-header">
+                <div className="header-content">
+                    <h3>Items de la factura</h3>
+                    <span className="item-count">{products.length} items</span>
                 </div>
+
+                <div className="header-actions">
+                    <ButtonType1 parentMethod={handleAddProduct}>
+                        Añadir item
+                    </ButtonType1>
+                    <ButtonType2
+                        parentMethod={handleEditProduct}
+                        // disabled={!selectedProduct}
+                    >
+                        Modificar item
+                    </ButtonType2>
+                    <ButtonType3
+                        parentMethod={handleDeleteProduct}
+                        // disabled={!selectedProduct}
+                    >
+                        Eliminar item
+                    </ButtonType3>
+                </div>
+            </header>
+
+            <div className="table-container">
+                <TableComponent
+                    columns={columns}
+                    data={tableData}
+                    onRowClick={handleRowClick}
+                    selectedRowId={selectedRowId}
+                />
             </div>
 
-            <TableComponent
-                columns={columns}
-                data={getTableData()}
-                onRowClick={(row) => {
-                    // Encontrar el producto original usando el ID adaptado
-                    const originalProduct = products.find(p =>
-                        (p.id[0] * 10000 + p.id[1]) === row.id
-                    );
-                    if (originalProduct) {
-                        handleRowClick(originalProduct);
-                    }
-                }}
-                selectedRowId={getSelectedRowId()}
-            />
+            {products.length > 0 && (
+                <footer className="invoice-summary">
+                    <div className="summary-row">
+                        <span className="summary-label">Total de la factura:</span>
+                        <span className="summary-value">${invoiceTotal.toFixed(2)}</span>
+                    </div>
+                </footer>
+            )}
 
             <ItemInvoiceModal
                 isOpen={modalOpen}
-                onClose={() => {
-                    setModalOpen(false);
-                    setSelectedProduct(null);
-                }}
+                onClose={handleCloseModal}
                 onSave={handleSaveProduct}
-                product={getProductFormData()}
+                product={productFormData}
                 mode={modalMode}
             />
         </section>

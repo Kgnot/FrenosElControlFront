@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root {
@@ -60,10 +61,13 @@
     --bg-primary: #ffffff;
     --bg-secondary: #f9fafb;
     --bg-card: #ffffff;
+    --surface: #ffffff;  /* Nuevo */
 
     /* Bordes */
     --border-color: #e5e7eb;
     --border-color-focus: var(--color-primary);
+    --border: var(--border-color);  /* Alias */
+    --border-light: #f3f4f6;  /* Nuevo */
 
     /* Texto */
     --text-primary: #111827;
@@ -73,9 +77,11 @@
     /* Variables de compatibilidad */
     --gray_app: var(--gray-300);
     --gray_app2: var(--gray-100);
+    --gray_app3: var(--gray-200);  /* Nuevo */
     --red_app: var(--color-danger);
     --blue_app: var(--color-secondary);
     --select_button: rgba(225, 225, 225, 0.8);
+    --background-app: var(--bg-secondary);  /* Nuevo */
 
     /* Transiciones simples */
     --transition: 0.2s ease;
@@ -83,7 +89,16 @@
     /* Border radius */
     --radius: 8px;
     --radius-lg: 12px;
+    --radius-xl: 16px;  /* Nuevo */
     --radius-full: 50px;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);  /* Nuevo */
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);  /* Nuevo */
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);  /* Nuevo */
+
+    /* Utilidades */
+    --font-family: "Raleway", system-ui, Avenir, Helvetica, Arial, serif;  /* Nuevo */
 }
 
 #root {

@@ -1,10 +1,12 @@
 {
+
   "name": "front",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "tauri dev",
+    "tauri:linux-optimize": "RUSTFLAGS='-C target-cpu=native' cargo build --release",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
