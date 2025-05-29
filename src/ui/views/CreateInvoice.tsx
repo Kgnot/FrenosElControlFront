@@ -1,9 +1,9 @@
 import './styles/CreateInvoice.css'
-import {CustomerForm} from "../components/CreateInvoiceComponents/CustomerForm/CustomerForm.tsx";
+import {InvoiceForm} from "../components/CreateInvoiceComponents/InvoiceForm/InvoiceForm.tsx";
 import {InvoiceDetails} from "../components/CreateInvoiceComponents/InvoiceDetails/InvoiceDetails.tsx";
 
 import {useForm, FormProvider} from 'react-hook-form'
-import {CustomerFormValues, schema} from "../../form/CustomerForm.ts";
+import {InvoiceFormValues, schema} from "../../form/InvoiceForm.ts";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {
     ProductInsertInvoice
@@ -11,7 +11,7 @@ import {
 
 export default function CreateInvoice() {
 
-    const methods = useForm<CustomerFormValues>({
+    const methods = useForm<InvoiceFormValues>({
         resolver: zodResolver(schema)
     });
     // Aqui nosotros tenemos el Form como un useForm
@@ -22,7 +22,7 @@ export default function CreateInvoice() {
         <FormProvider {...methods}>
             <section className={"CREATEINVOICE_PAGE PAGE "}>
                 <div className={"CREATEINVOICE_PAGE_sup "}>
-                    <CustomerForm className={"CREATEINVOICE_PAGE_sup_izq hijo"}/>
+                    <InvoiceForm className={"CREATEINVOICE_PAGE_sup_izq hijo"}/>
                     <InvoiceDetails className={"CREATEINVOICE_PAGE_sup_der hijo"}/>
                 </div>
                 <ProductInsertInvoice className={"CREATEINVOICE_PAGE_inf hijo"}/>

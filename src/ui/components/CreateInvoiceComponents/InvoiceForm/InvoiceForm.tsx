@@ -1,11 +1,11 @@
 import {useFormContext} from 'react-hook-form';
-import './CustomerForm.css'
-import {CustomerFormValues} from "../../../../form/CustomerForm.ts";
+import './InvoiceForm.css'
+import {InvoiceFormValues} from "../../../../form/InvoiceForm.ts";
 import {InputCustomerForm} from "./InputForm/InputCustomerForm.tsx";
 
-export const CustomerForm = ({className}: { className: string }) => {
+export const InvoiceForm = ({className}: { className: string }) => {
     // Elimina el useForm aquí porque el form se manejará desde CreateInvoice
-    const { control, formState } = useFormContext<CustomerFormValues>();
+    const { control, formState } = useFormContext<InvoiceFormValues>();
 
     return (
         <section className={`customerForm ${className}`}>

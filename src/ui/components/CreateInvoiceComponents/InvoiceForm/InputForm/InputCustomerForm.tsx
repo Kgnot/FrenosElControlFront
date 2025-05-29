@@ -1,10 +1,10 @@
 import {Control, Controller, FieldError} from "react-hook-form";
-import {CustomerFormValues} from "../../../../../form/CustomerForm.ts";
+import {InvoiceFormValues} from "../../../../../form/InvoiceForm.ts";
 import './InputCustomerForm.css'
 
 interface Props {
-    name: keyof CustomerFormValues
-    control: Control<CustomerFormValues>
+    name: keyof InvoiceFormValues
+    control: Control<InvoiceFormValues>
     label: string
     type?: string
     error?: FieldError
