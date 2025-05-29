@@ -9,9 +9,10 @@ interface Props {
     type?: string
     error?: FieldError
     placeHolder?: string
+    value?: string
 }
 
-export const InputCustomerForm = ({name, control, label, type, error,placeHolder}: Props) => {
+export const InputCustomerForm = ({name, control, label, type, error, placeHolder,value}: Props) => {
     return (
         <div className="form-group">
             <label htmlFor={name}>{label}</label>
@@ -20,7 +21,13 @@ export const InputCustomerForm = ({name, control, label, type, error,placeHolder
                 name={name}
                 control={control}
                 render={({field}) =>
-                    <input {...field} type={type} className={`form-control ${error ? "is-invalid" : ""}`} id={name} placeholder={placeHolder}/>
+                    <input {...field}
+                           type={type}
+                           className={`form-control ${error ? "is-invalid" : ""}`}
+                           id={name}
+                           placeholder={placeHolder}
+                           value={value}
+                    />
                 }
             />
             {error && <p className="error">{error.message}</p>}

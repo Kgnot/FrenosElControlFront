@@ -8,8 +8,17 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {
     ProductInsertInvoice
 } from "../components/CreateInvoiceComponents/productsInsertInvoice/ProductInsertInvoice.tsx";
+import {Invoice} from "../../entity/Invoice.ts";
 
-export default function CreateInvoice() {
+interface CreationInvoiceProps {
+    invoice?: Invoice
+}
+
+export default function CreateInvoice(
+    {
+        invoice
+    }: CreationInvoiceProps
+) {
 
     const methods = useForm<InvoiceFormValues>({
         resolver: zodResolver(schema)
@@ -17,15 +26,22 @@ export default function CreateInvoice() {
     // Aqui nosotros tenemos el Form como un useForm
 
 
-
     return (
         <FormProvider {...methods}>
             <section className={"CREATEINVOICE_PAGE PAGE "}>
                 <div className={"CREATEINVOICE_PAGE_sup "}>
-                    <InvoiceForm className={"CREATEINVOICE_PAGE_sup_izq hijo"}/>
-                    <InvoiceDetails className={"CREATEINVOICE_PAGE_sup_der hijo"}/>
+                    <InvoiceForm
+                        className={"CREATEINVOICE_PAGE_sup_izq hijo"}
+                        invoice={invoice}
+                    />
+                    <InvoiceDetails
+                        className={"CREATEINVOICE_PAGE_sup_der hijo"}
+                    />
                 </div>
-                <ProductInsertInvoice className={"CREATEINVOICE_PAGE_inf hijo"}/>
+                <ProductInsertInvoice
+                    className={"CREATEINVOICE_PAGE_inf hijo"}
+                    invoice={invoice}
+                />
             </section>
         </FormProvider>
     )
